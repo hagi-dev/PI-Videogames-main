@@ -1,0 +1,29 @@
+.videogames{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 25% 70%;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    background-color: #000;
+    position: relative;
+    
+    .background{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .videogames__header{
+        width: 100%;
+        min-width: 325px;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .videogames__body{
+        width: 100%;
+        font-size:4rem
+    }
+} 
