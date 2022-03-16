@@ -4,7 +4,8 @@ import {
     GET_ORDER_ALPHABET_RATING, 
     GET_ORDER_ASCENDING_DESCENDING, 
     GET_FILTER_DATA, 
-    GET_ORDER_DATA 
+    GET_ORDER_DATA ,
+    GET_STATE_SELECTION 
 } from '../action/actionFilterAndOrder';
 
 const initialState = {
@@ -13,6 +14,10 @@ const initialState = {
     genre: '',
     alphabetOrRating: '',
     ascendingOrDescending: '',
+    stateSelection: {
+        state: false,
+        name: ''
+    }
 }
 
 const filter = (state= initialState, action) => {
@@ -46,10 +51,21 @@ const filter = (state= initialState, action) => {
             return{
                 ...state,
                 FilterData: action.payload
-            } 
+            }
+        case GET_STATE_SELECTION:
+            console.log('stateSelection reducers', action.payload)
+            return{
+                ...state,
+                stateSelection: {
+                    name: action.payload.name,
+                    state: action.payload.state
+                }
+            }     
         default:
             return state;                   
     }
 }
+
+console.log('state', initialState);
 
 export default filter;

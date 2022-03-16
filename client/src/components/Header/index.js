@@ -19,9 +19,9 @@ const Header = () => {
         </div>
         <div className="header__formSearch">
             <form>
-                <label>Name</label>
+                <label>Search for name....</label>
                 <input type="text" />
-                <input type= 'submit' value="Search"/>
+                <button type='submit'> Search</button>
             </form>
         </div>
         <div className="header__perfil"></div>

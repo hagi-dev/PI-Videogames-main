@@ -4,6 +4,7 @@ export const GET_ORDER_ALPHABET_RATING = 'GET_ORDER_ALPHABET_RATING';
 export const GET_ORDER_ASCENDING_DESCENDING = 'GET_ORDER_ASCENDING_DESCENDING';
 export const GET_FILTER_DATA = 'GET_FILTER_DATA';
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
+export const GET_STATE_SELECTION = 'GET_STATE_SELECTION';
 
 export const getFilterCreatedOrExisted = (option) => {
     return {
@@ -43,6 +44,13 @@ export const getFilterData = (data) => {
 export const getOrderData = (data) => {
     return {
         type: GET_ORDER_DATA,
+        payload: data
+    }
+}
+
+export const getStateSelection = (data) =>{
+    return {
+        type: GET_STATE_SELECTION,
         payload: data
     }
 }
