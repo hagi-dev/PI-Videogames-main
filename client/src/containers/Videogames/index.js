@@ -30,7 +30,7 @@ const Videogames = () => {
         </div>
         <div className="videogames__body">
             <FilterAndOrder/>
-            <VideogameList/>
+            <VideogameList data={videoGames}/>
         </div>
     </div>
     )

@@ -5,7 +5,6 @@ const VideoGameCard = props => {
     const { videoGame } = props;
     return (
     <div>
-        <img src={videoGame.image}/>
         <h3>{videoGame.name}</h3>
     </div>
     )

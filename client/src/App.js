@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/home" element={<VideogameCard/>} />
+        <Route exact path="/home" element={<Videogames/>} />
       </Routes>
     </div>
   );

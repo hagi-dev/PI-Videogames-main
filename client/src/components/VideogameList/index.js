@@ -6,16 +6,17 @@ import './style.scss';
 
 import VideogameCard from '../VideogameCard/index';
 
-const VideogameList = props => {
+const VideogameList = props => {  
 
-  const videogames= useSelector(state => state.rootReducer.videoGames);
+  const {data} = props
 
-  const replace= videogames && videogames.slice(30);
+  const replace= data && data.slice(30);
 
   return (
     <div className="videogameList">
       {console.log(replace)}
-      hola
+      {/* {replace[0] && replace[0].name}
+      {replace[1] && replace[1].name} */}
         {
             replace && replace.map(element => {
                 return <VideogameCard key={element.id} videoGame={element}/>

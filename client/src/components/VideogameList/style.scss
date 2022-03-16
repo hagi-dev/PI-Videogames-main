@@ -3,4 +3,7 @@
     width: 98%;
     backdrop-filter: blur(3px);
     background-color: rgba(126, 126, 126, 0.3);
+    overflow-x: hidden;
+    overflow-y:auto;
+    height: 87vh;
 }
