@@ -5,5 +5,25 @@
     background-color: rgba(126, 126, 126, 0.3);
     overflow-x: hidden;
     overflow-y:auto;
-    height: 87vh;
+    height: 86vh;
+    margin-top: 1vh;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    &::-webkit-scrollbar{
+        -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:vertical{
+        width:10px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: rgba(14,57,167,0.75);
+        border-radius: 20px;
+        border: 2px solid rgba(0,0,0,0.3);
+    }
+    &::-webkit-scrollbar-track{
+        background: transparent;
+    }
 }

@@ -1,8 +1,10 @@
+import { useDispatch} from 'react-redux';
+
 import { 
     GET_ALL_VIDEOGAMERS, 
     GET_VIDEOGAMER, 
     GET_VIDEOGAMER_BY_NAME, 
-    GET_ALL_GENRES 
+    GET_ALL_GENRES,
 } from '../action/actionRoot';
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_VIDEOGAMERS:
+            console.log('GET_ALL_VIDEOGAMERS', action.payload);
             return {
                 ...state,
                 videoGames: action.payload
@@ -32,7 +35,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 genres: action.payload
-            }
+            }                
         default:
             return state;
     }

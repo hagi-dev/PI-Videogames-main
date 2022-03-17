@@ -6,21 +6,23 @@ import Header from '../../components/Header/index';
 import Background from '../../assets/img/background.png';
 import VideogameList from '../../components/VideogameList/index';
 import FilterAndOrder from '../../components/FilterAndOrder/index';
-import { getStateSelection } from '../../redux/action/actionFilterAndOrder';
+import { getStateSelection, initialFilterData } from '../../redux/action/actionFilterAndOrder';
 import './style.scss';
 
 const Videogames = () => {
+    const filterData = useSelector(state => state.filterAndOrder.filterData);
     const videoGames = useSelector(state => state.rootReducer.videoGames);
-    const stateSelection = useSelector(state => state.filter.stateSelection);
+    const seeData = !filterData ? videoGames.resData : filterData;
+    const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        console.log('click base')
         stateSelection.state && dispatch(getStateSelection({state:false ,name:''}));
     }
 
     useEffect(() => {
         dispatch(getAllVideoGames());
+        dispatch(initialFilterData());
     }, [])
     return (
     <div className="videogames" onClick={handleClick} style={{backgroundImage: {Background}}}>
@@ -30,7 +32,7 @@ const Videogames = () => {
         </div>
         <div className="videogames__body">
             <FilterAndOrder/>
-            <VideogameList data={videoGames}/>
+            <VideogameList data={seeData}/>
         </div>
     </div>
     )

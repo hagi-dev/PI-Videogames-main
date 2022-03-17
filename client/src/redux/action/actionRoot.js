@@ -11,7 +11,7 @@ export const getAllVideoGames = () => {
             .then((response) => {
                 dispatch({
                     type: GET_ALL_VIDEOGAMERS,
-                    payload: response.data.resData
+                    payload: response.data
                 });
             })
             .catch((err) => {
@@ -64,3 +64,4 @@ export const getAllGenres = ()=>{
             });
     }
 }
+

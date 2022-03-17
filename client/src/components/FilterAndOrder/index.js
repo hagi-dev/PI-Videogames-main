@@ -14,10 +14,11 @@ const FilterAndOrder = props => {
     state3: false,//alphabet or rating
     state4: false,//asc or desc
   });
-  const createdOrExisted = useSelector(state => state.createdOrExisted);
-  const stateSelection = useSelector(state => state.filter.stateSelection);
-  const prueba =["all","existed","created","all","existed","created"
-  ,"all","existed","created","all","existed","created","all","existed","created","all","existed","created","all","existed","created","all","existed","created","all","existed","created"]
+  const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
+  const genres =['all','Action','Adventure','Animation','Comedy','Crime','Documentary','Drama'];
+  const createdOrExisted =["all","existed","created"];
+  const alphabetOrRating =["alphabet","rating"];
+  const ascOrDesc =["asc","desc"];
 
 
   return (
@@ -26,22 +27,22 @@ const FilterAndOrder = props => {
         <h5>Filter:</h5>
         <div className="filterAndOrder__filterGenre" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Genre'}))}}>
           <h4 className={`h4 ${stateActivated.state1  ? 'activate' : 'deactivate'} `}>Genre</h4>
-          <Selection activa={stateActivated} functionActiva={setStateActivated} options={prueba} version={'v1'} name={'Genre'} />
+          <Selection activa={stateActivated} functionActiva={setStateActivated} options={genres} version={'v1'} name={'Genre'} />
         </div>
         <div className="filterAndOrder__filterCreatedOrExisted" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Created Or Existed'}))}}>
           <h4  className={`h4 ${stateActivated.state2  ? 'activate' : 'deactivate'} `}>Created Or Existed</h4>
-          <Selection activa={stateActivated} functionActiva={setStateActivated} options={prueba} version={'v2'} name={'Created Or Existed'} />
+          <Selection activa={stateActivated} functionActiva={setStateActivated} options={createdOrExisted} version={'v2'} name={'Created Or Existed'} />
         </div>
       </div>
       <div className="filterAndOrder__containerOrder">
         <h5>Order:</h5>
-        <div className="filterAndOrder__OrderAlphabetOrRating" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Alphabet or Existed'}))}}>
-          <h4 className={`h4 ${stateActivated.state3  ? 'activate' : 'deactivate'} `}>Alphabet or Existed</h4>
-          <Selection activa={stateActivated} functionActiva={setStateActivated} options={prueba} version={'v1'} name={'Alphabet or Existed'} />
+        <div className="filterAndOrder__OrderAlphabetOrRating" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Alphabet or Rating'}))}}>
+          <h4 className={`h4 ${stateActivated.state3  ? 'activate' : 'deactivate'} `}>Alphabet or Rating</h4>
+          <Selection activa={stateActivated} functionActiva={setStateActivated} options={alphabetOrRating} version={'v1'} name={'Alphabet or Rating'} />
         </div>
         <div className="filterAndOrder__OrderAscOrDesc" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Asc or Desc'}))}}>
           <h4  className={`h4 ${stateActivated.state4  ? 'activate' : 'deactivate'} `}>Asc or Desc</h4>
-          <Selection activa={stateActivated} functionActiva={setStateActivated} options={prueba} version={'v2'} name={'Asc or Desc'} />
+          <Selection activa={stateActivated} functionActiva={setStateActivated} options={ascOrDesc} version={'v2'} name={'Asc or Desc'} />
         </div>
       </div>
     </div>

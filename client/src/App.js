@@ -1,7 +1,7 @@
 import { Routes , Route} from 'react-router-dom';
 
 import './App.css';
-import './helpers/normalize.css';
+import './helpers/format/normalize.css';
 import Videogames from './containers/Videogames';
 import VideogameCard from './components/VideogameList/index';
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
 import './style.scss';
 
@@ -10,22 +9,20 @@ const VideogameList = props => {
 
   const {data} = props
 
-  const replace= data && data.slice(30);
-
   return (
     <div className="videogameList">
-      {console.log(replace)}
-      {/* {replace[0] && replace[0].name}
-      {replace[1] && replace[1].name} */}
         {
-            replace && replace.map(element => {
-                return <VideogameCard key={element.id} videoGame={element}/>
-            })
+            data && data.map((element,index) => {
+              if(element.message){return <p key={index} style={{color:"white"}} >{element.message}</p>}
+              if(!element.message){return <VideogameCard key={element.id} videoGame={element}/>}
+            }) 
         }
     </div>
   )
 }
 
-VideogameList.propTypes = {}
+VideogameList.propTypes = {
+  data: PropTypes.array
+}
 
 export default VideogameList

@@ -2,42 +2,76 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {getFilterCreatedOrExisted,getStateSelection} from '../../redux/action/actionFilterAndOrder';
+import {
+    getFilterData,
+    getFilterCreatedOrExisted,
+    getStateSelection,
+    getFilterGenre,
+    getOrderAlphabetOrRating,
+    getOrderAscendingOrDescending,
+    getOrderData
+} from '../../redux/action/actionFilterAndOrder';
+import { getAllVideoGames} from '../../redux/action/actionRoot';
 import './style.scss';
 
 const Selection = props => {
     const dispatch = useDispatch();
     const {options,version,functionActiva,name} = props;
-    const stateSelection = useSelector(state => state.filter.stateSelection);
+    const videoGames = useSelector(state => state.rootReducer.videoGames);
+    const stateFilter = useSelector(state => state.filterAndOrder.stateFilter);
+    const stateOder = useSelector(state => state.filterAndOrder.stateOrder);
+    const filterData = useSelector(state => state.filterAndOrder.filterData);
+    const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
     const [textSelection,setTextSelection] = useState('');
 
     const handleClick = (e) => {
         dispatch(getStateSelection({state:!stateSelection.state ,name:name}));
     }
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         let replaces = e.target.innerText.trim().replace(/\-/g, '');
-        name === 'Genre' && functionActiva((etem)=>{
-            return {...etem,state1:true}
-        });
-        name === 'Created Or Existed' && functionActiva((etem)=>{
-            return {...etem,state2:true}
-        });;
-        name === 'Alphabet or Existed' && functionActiva((etem)=>{
-            return {...etem,state3:true}
-        });
-        name === 'Asc or Desc' && functionActiva((etem)=>{
-            return {...etem,state4:true}
-        }); 
+        if(name === 'Genre'){
+            functionActiva((etem)=>{
+                return {...etem,state1:true}
+            })
+            dispatch(getFilterGenre(replaces));
+            dispatch(getAllVideoGames());
+            dispatch(getFilterData({videoGames:videoGames.resData,apiCount:videoGames.apiCount,genre:replaces,createdOrExisted:stateFilter.createdOrExisted}));
+            
+        }
+        if(name === 'Created Or Existed'){
+            functionActiva((etem)=>{
+                return {...etem,state2:true}
+            })
+            dispatch(getFilterCreatedOrExisted(replaces));
+            dispatch(getAllVideoGames());
+            dispatch(getFilterData({videoGames:videoGames.resData,apiCount:videoGames.apiCount,genre:stateFilter.genre,createdOrExisted:replaces}));
+
+        }
+        if(name === 'Alphabet or Rating'){
+            functionActiva((etem)=>{
+                return {...etem,state3:true}
+            })
+            dispatch(getOrderAlphabetOrRating(replaces));
+            dispatch(getOrderData({videoGames: filterData,order:stateOder.order,alphabetOrRating:replaces}));
+        }
+        if(name === 'Asc or Desc'){
+            functionActiva((etem)=>{
+                return {...etem,state4:true}
+            })
+            dispatch(getOrderAscendingOrDescending(replaces));
+            dispatch(getOrderData({videoGames: filterData,order:replaces,alphabetOrRating:stateOder.alphabetOrRating}));
+        }
         dispatch(getStateSelection({state: !stateSelection.state,name:name}));
         setTimeout(() => {
             setTextSelection(replaces);
             
-        },200);
+        },200);        
     }
 
     useEffect(() => {
-        dispatch(getFilterCreatedOrExisted(textSelection));
-    },[])
+        console.log('useEffect');
+        dispatch(getOrderData({videoGames: filterData,order:stateOder.order,alphabetOrRating:stateOder.alphabetOrRating}));
+    } ,[stateSelection.state])
 
     return (
         <div className={`select ${stateSelection.state && stateSelection.name === name ? 'clicked ':''} ${version} ${options.length<4 && 'short'} ${options. length<3 && 'small'}`}>
@@ -60,4 +94,4 @@ Selection.propTypes = {
     options: PropTypes.array
 }
 
-export default Selection
+export default Selection;

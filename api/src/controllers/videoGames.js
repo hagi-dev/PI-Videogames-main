@@ -25,6 +25,7 @@ exports.getAll = async (req,res) => {
                     id: element.id,
                     name: element.name,
                     image: element.image ? element.image : null,
+                    rating: element.rating,
                     genres: element.genres && element.genres.map(e=>{
                         return {
                             id: e.id,
@@ -51,7 +52,8 @@ exports.getAll = async (req,res) => {
                         id: item.id,
                         name: item.name,
                         image: item.background_image,
-                        genders: item.genres && item.genres.map((element)=>{
+                        rating: item.rating,
+                        genres: item.genres && item.genres.map((element)=>{
                             return {
                                 id: element.id,
                                 name: element.name,
@@ -64,8 +66,10 @@ exports.getAll = async (req,res) => {
             .then((data)=>{
                 //console.log('data api',data.length);
                 res.status(200).json({
+                    dbCount: filterDataBd.length,
+                    apiCount: data.length,
                     count: data.length + filterDataBd.length,
-                    resData: [...filterDataBd, ...data],
+                    resData: [...data,...filterDataBd],
                 });
             });
         }
@@ -86,6 +90,7 @@ exports.getAll = async (req,res) => {
                     id: element.id,
                     name: element.name,
                     image: element.image ? element.image : null,
+                    rating: element.rating,
                     genres: element.genres && element.genres.map(e=>{
                         return {
                             id: e.id,
@@ -117,6 +122,7 @@ exports.getAll = async (req,res) => {
                         id: item.id,
                         name: item.slug,
                         image: item.background_image,
+                        rating: item.rating,
                         genres: item.genres && item.genres.map((element)=>{
                             return {
                                 id: element.id,
@@ -156,6 +162,7 @@ exports.getAll = async (req,res) => {
                         id: item.id,
                         name: item.name,
                         image: item.background_image ? item.background_image : null,
+                        rating: item.rating,
                         genres: item.genres && item.genres.map((element)=>{
                             return {
                                 id: element.id,
