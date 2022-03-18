@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideoGames } from '../../redux/action/actionRoot';
+import { getAllVideoGames,getAllGenres } from '../../redux/action/actionRoot';
 
 import Header from '../../components/Header/index';
 import ButtonCreate from '../../components/ButtonCreate/index';
@@ -24,6 +24,7 @@ const Videogames = () => {
         dispatch(getAllVideoGames());
         dispatch(initialFilterData());
         dispatch(InitialPaginationData());
+        dispatch(getAllGenres());
         
     }, [])
     return (

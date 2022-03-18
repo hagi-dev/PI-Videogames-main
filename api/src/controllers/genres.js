@@ -26,8 +26,15 @@ exports.getAll = async (req,res) => {
         });
     }
 
+    let dataSend = resGenres.map(item => {
+        return {
+            id: item.id,
+            name: item.name,
+        }
+    })
+
     res.status(200).json({
         count: resGenres.length,
-        resData: resGenres,
+        resData: dataSend,
     });
 }

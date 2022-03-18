@@ -57,7 +57,7 @@ export const getAllGenres = ()=>{
             .then((response) => {
                 dispatch({
                     type: GET_ALL_GENRES,
-                    payload: response.data
+                    payload: response.data.resData
                 });
             })
             .catch((err) => {

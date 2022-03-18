@@ -7,6 +7,7 @@ import {getStateSelection} from '../../redux/action/actionFilterAndOrder';
 import './style.scss';
 
 const FilterAndOrder = props => {
+    const genre22 = useSelector(state => state.rootReducer.genres);
   const dispatch = useDispatch();
   const [stateActivated, setStateActivated] = useState({
     state1: false,//genre
@@ -14,8 +15,9 @@ const FilterAndOrder = props => {
     state3: false,//alphabet or rating
     state4: false,//asc or desc
   });
+  const abstractDataGenre = genre22.map(genre => genre.name);
   const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
-  const genres =['all','Action','Adventure','Animation','Comedy','Crime','Documentary','Drama'];
+  const genres =['all', ...abstractDataGenre];
   const createdOrExisted =["all","existed","created"];
   const alphabetOrRating =["alphabet","rating"];
   const ascOrDesc =["asc","desc"];
@@ -23,6 +25,7 @@ const FilterAndOrder = props => {
 
   return (
     <div className="filterAndOrder">
+      {console.log('genre aca',genre22)}
       <div className="filterAndOrder__containerFilter">
         <h5>Filter:</h5>
         <div className="filterAndOrder__filterGenre" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Genre'}))}}>
