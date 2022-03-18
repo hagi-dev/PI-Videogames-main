@@ -1,0 +1,30 @@
+.buttonCreate{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: none;
+    color: #ffffff;
+    background: rgb(49,106,254);
+    background: linear-gradient(90deg, rgba(49,106,254,1) 0%, rgba(14,57,167,1) 58%);
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.68);
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.68);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+        a{
+            color: #ffffff;
+            font-size: 4rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 25%;
+        }
+
+
+        &:hover{
+            transform: scale(0.9);
+        }
+
+}

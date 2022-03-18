@@ -1,11 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './style.scss';
+
 const VideoGameCard = props => {
     const { videoGame } = props;
     return (
-    <div style={{width: "300px",margin: '10px 20px', height: "150px"}}>
-        <h3 style={{color:'white', margin: "0 50px",textAlign:'center'}}>{videoGame.name}</h3>
+    <div className='videoGameCard'>
+        <dic className='videoGameCard__image'>
+            <img src={videoGame.image} alt={videoGame.name} />
+        </dic>
+        <div className='videoGameCard__title'>
+            <h3>{videoGame.name}</h3>
+        </div>
+        <div className='videoGameCard__genres'>
+            {
+               videoGame.genres && videoGame.genres.map(genre => {
+                     return <p key={genre.id}>{genre.name}</p>
+               })
+            }
+        </div>
     </div>
     )
 }

@@ -68,3 +68,10 @@ export const initialFilterData = () => {
         })
     }
 }
+
+export const getPaginationCurrent = (current) => {
+    return {
+        type: GET_FILTER,
+        payload: current
+    }
+}

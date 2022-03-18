@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getVideogameByName,getVideogameFilterByName } from '../../redux/action/actionRoot';
 import videogame from '../../assets/img/videogame.png';
 import './style.scss';
 
 const Header = () => {
+    const [active, setActive] = useState(false);
+    const [searchText, setSearchText] = useState({
+        name: '',
+    });
+    const dispatch = useDispatch();
+   const handleClickInput = () => {
+         setActive(true);
+   } 
+
+   const handleChange = (e) => {
+    let changeText = e.target.value;
+    console.log(changeText);
+    setSearchText(()=>{
+        return {
+            ...searchText,
+            name: changeText,
+        }
+    });
+   }
+
+   const handleBlur = (e) => {
+       !searchText && setActive(false);
+   }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(getVideogameByName(searchText.name));
+        dispatch(getVideogameFilterByName(searchText.name));
+    }
+ 
   return (
     <div className="header">
         <div className="header__container_logo">
@@ -18,9 +49,9 @@ const Header = () => {
             <img src={videogame} alt="videogame" />
         </div>
         <div className="header__formSearch">
-            <form>
-                <label>Search for name....</label>
-                <input type="text" />
+            <form onSubmit={handleSubmit}>
+                <label  className={`label ${active && 'active'}`}>Search for name....</label>
+                <input value={searchText.name} onBlur={handleBlur} onChange={handleChange} onClick={handleClickInput} type="text" />
                 <button type='submit'> Search</button>
             </form>
         </div>

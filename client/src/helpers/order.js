@@ -1,10 +1,11 @@
 const orderData = (data,alphabetOrRating,order) => {
-    console.log("orderByAlphabet data: ",data,' sentido',order);
     let orderData = [];
+    if(!alphabetOrRating.length){
+        return data;
+    }
     if(!order){return data};
     if(alphabetOrRating === 'alphabet'){orderData = orderAlphabet(data,order)}
     else if(alphabetOrRating === 'rating'){orderData = orderRating(data,order)}
-    console.log("detro de order alpha",orderData);
     return orderData;
 }
 

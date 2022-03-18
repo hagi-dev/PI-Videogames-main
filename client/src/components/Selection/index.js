@@ -11,11 +11,14 @@ import {
     getOrderAscendingOrDescending,
     getOrderData
 } from '../../redux/action/actionFilterAndOrder';
+import {paginationData} from '../../helpers/pagination';
+import { getPaginationCurrent,getPageCurrent } from '../../redux/action/actionPagination';
 import { getAllVideoGames} from '../../redux/action/actionRoot';
 import './style.scss';
 
 const Selection = props => {
     const dispatch = useDispatch();
+    const [see,setSee] = useState(false);
     const {options,version,functionActiva,name} = props;
     const videoGames = useSelector(state => state.rootReducer.videoGames);
     const stateFilter = useSelector(state => state.filterAndOrder.stateFilter);
@@ -36,7 +39,6 @@ const Selection = props => {
             dispatch(getFilterGenre(replaces));
             dispatch(getAllVideoGames());
             dispatch(getFilterData({videoGames:videoGames.resData,apiCount:videoGames.apiCount,genre:replaces,createdOrExisted:stateFilter.createdOrExisted}));
-            
         }
         if(name === 'Created Or Existed'){
             functionActiva((etem)=>{
@@ -45,7 +47,8 @@ const Selection = props => {
             dispatch(getFilterCreatedOrExisted(replaces));
             dispatch(getAllVideoGames());
             dispatch(getFilterData({videoGames:videoGames.resData,apiCount:videoGames.apiCount,genre:stateFilter.genre,createdOrExisted:replaces}));
-
+            // dispatch(getPaginationCurrent(paginationData(filterData,15,1)));
+            // dispatch(getPageCurrent(1));
         }
         if(name === 'Alphabet or Rating'){
             functionActiva((etem)=>{
@@ -53,6 +56,8 @@ const Selection = props => {
             })
             dispatch(getOrderAlphabetOrRating(replaces));
             dispatch(getOrderData({videoGames: filterData,order:stateOder.order,alphabetOrRating:replaces}));
+            dispatch(getPaginationCurrent(paginationData(filterData,15,1)));
+            dispatch(getPageCurrent(1));
         }
         if(name === 'Asc or Desc'){
             functionActiva((etem)=>{
@@ -60,6 +65,8 @@ const Selection = props => {
             })
             dispatch(getOrderAscendingOrDescending(replaces));
             dispatch(getOrderData({videoGames: filterData,order:replaces,alphabetOrRating:stateOder.alphabetOrRating}));
+            dispatch(getPaginationCurrent(paginationData(filterData,15,1)));
+            dispatch(getPageCurrent(1));
         }
         dispatch(getStateSelection({state: !stateSelection.state,name:name}));
         setTimeout(() => {
@@ -69,7 +76,6 @@ const Selection = props => {
     }
 
     useEffect(() => {
-        console.log('useEffect');
         dispatch(getOrderData({videoGames: filterData,order:stateOder.order,alphabetOrRating:stateOder.alphabetOrRating}));
     } ,[stateSelection.state])
 

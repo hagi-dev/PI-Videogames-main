@@ -8,6 +8,7 @@ import {
     GET_STATE_SELECTION,
     GET_FILTER 
 } from '../action/actionFilterAndOrder';
+ import { GET_VIDEOGAMER_FILTER_BY_NAME } from '../action/actionRoot';
 
 import { filterDate } from '../../helpers/filter';
 import orderDate from '../../helpers/order';
@@ -50,7 +51,13 @@ const filter = (state= initialState, action) => {
                     ...state.stateFilter,
                     genre: action.payload
                 }
-            }  
+            }
+        case GET_VIDEOGAMER_FILTER_BY_NAME:
+            console.log('peticonflter name reducer',action.payload);
+            return {
+                ...state,
+                filterData: action.payload
+            }     
         case GET_ORDER_ALPHABET_RATING:
             return{
                 ...state,
@@ -76,8 +83,6 @@ const filter = (state= initialState, action) => {
 
         case GET_ORDER_DATA:
             let dataOrder = orderDate(action.payload.videoGames, action.payload.alphabetOrRating, action.payload.order);
-            console.log("order reducer ",action.payload);
-            console.log("order reducer return ",dataOrder);
             return{
                 ...state,
                 filterData: dataOrder

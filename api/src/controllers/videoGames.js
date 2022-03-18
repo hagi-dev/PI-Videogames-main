@@ -10,6 +10,7 @@ exports.getAll = async (req,res) => {
     let result = [];
     let responseData=[];
     const {name} = req.query;
+    console.log('biene name ',name);
     try {
         if(!name){
             let dataBD = await Videogame.findAll(
@@ -173,6 +174,7 @@ exports.getAll = async (req,res) => {
                 }
 
                 return res.status(200).json({
+                    apiCount: result.length,
                     count: result.length + filterDataBd.length,
                     resData: [...filterDataBd, ...result],
                 });

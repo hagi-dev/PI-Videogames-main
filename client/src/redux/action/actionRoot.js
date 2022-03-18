@@ -4,6 +4,7 @@ export const GET_ALL_VIDEOGAMERS = 'GET_ALL_VIDEOGAMERS';
 export const GET_VIDEOGAMER = 'GET_VIDEOGAMER';
 export const GET_VIDEOGAMER_BY_NAME = 'GET_VIDEOGAMER_BY_NAME';
 export const GET_ALL_GENRES = 'GET_ALL_GENRES';
+export const GET_VIDEOGAMER_FILTER_BY_NAME = 'GET_VIDEOGAMER_FILTER_BY_NAME';
 
 export const getAllVideoGames = () => {
     return (dispatch) => {
@@ -57,6 +58,22 @@ export const getAllGenres = ()=>{
                 dispatch({
                     type: GET_ALL_GENRES,
                     payload: response.data
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+}
+
+export const getVideogameFilterByName = (name)=>{
+    console.log('peticon action name',name);
+    return (dispatch) => {
+        axios.get('http://localhost:3001/videogames?name='+name)
+            .then((response) => {
+                dispatch({
+                    type: GET_VIDEOGAMER_FILTER_BY_NAME,
+                    payload: response.data.resData
                 });
             })
             .catch((err) => {

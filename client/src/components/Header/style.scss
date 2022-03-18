@@ -75,12 +75,14 @@
             justify-content: center;
             font-family: 'mulish', sans-serif;
 
-            label{
+            .label{
                 color:#ffffff; 
                 top: 12px;
                 position: absolute;
-                transition: 0.5s ease-in-out;
+                transition: 0.2s ease-in-out;
                 background-color:transparent;
+                cursor: text;
+                z-index: -20;
                
             }
             input{
@@ -93,6 +95,7 @@
                 color: #ffffff;
                 background: rgba(255,255,255, 0.2);
                 outline: none;
+                z-index: 1;
                 &:focus{
                     border: none;
                     outline: none;
@@ -123,13 +126,10 @@
                     background: linear-gradient(270deg, rgba(49,106,254,1) 0%, rgba(14,57,167,1) 58%);
                 }
             }
-            
-            &:hover{
-                label{
-                    transform: translate(0px,-30px);
-                    font-size:14px;
-                    color: rgb(189, 189, 189);
-                }
+            .label.active{
+                transform: translate(0px,-30px);
+                font-size:14px;
+                color: rgb(189, 189, 189);
             }
 
         }

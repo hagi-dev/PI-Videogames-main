@@ -1,17 +1,18 @@
 .videogameList{
     max-width: 1500px;
-    width: 98%;
+    width: 95%;
     backdrop-filter: blur(3px);
     background-color: rgba(126, 126, 126, 0.3);
     overflow-x: hidden;
     overflow-y:auto;
-    height: 86vh;
+    height: 85vh;
     margin-top: 1vh;
     border-radius: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    padding: 0 20px;
+    padding-top: 10px;
     &::-webkit-scrollbar{
         -webkit-appearance: none;
     }
