@@ -19,7 +19,6 @@ const paginate = (state= initialState, action) => {
                 paginationData: dataInitial
             }
         case GET_PAGINATION_DATA:
-            console.log('peticon paginate reducer',action.payload);
             return {
                 ...state,
                 paginationData: action.payload

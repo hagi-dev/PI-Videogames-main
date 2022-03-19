@@ -25,7 +25,6 @@ const FilterAndOrder = props => {
 
   return (
     <div className="filterAndOrder">
-      {console.log('genre aca',genre22)}
       <div className="filterAndOrder__containerFilter">
         <h5>Filter:</h5>
         <div className="filterAndOrder__filterGenre" onClick={()=>{dispatch(getStateSelection({state:!stateSelection.state ,name:'Genre'}))}}>

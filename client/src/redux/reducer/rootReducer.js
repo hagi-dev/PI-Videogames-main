@@ -26,7 +26,6 @@ const rootReducer = (state = initialState, action) => {
                 videoGame: action.payload
             }
         case GET_VIDEOGAMER_BY_NAME:
-            console.log('peticon action general reducer',action.payload);
             return {
                 ...state,
                 videoGames: action.payload

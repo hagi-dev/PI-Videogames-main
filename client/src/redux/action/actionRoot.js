@@ -23,7 +23,7 @@ export const getAllVideoGames = () => {
 
 export const getVideogameById = (id)=>{
     return (dispatch) => {
-        axios.get(`http://localhost:3001/videogamer/${id}`)
+        axios.get(`http://localhost:3001/videogame/${id}`)
             .then((response) => {
                 dispatch({
                     type: GET_VIDEOGAMER,
@@ -67,7 +67,6 @@ export const getAllGenres = ()=>{
 }
 
 export const getVideogameFilterByName = (name)=>{
-    console.log('peticon action name',name);
     return (dispatch) => {
         axios.get('http://localhost:3001/videogames?name='+name)
             .then((response) => {

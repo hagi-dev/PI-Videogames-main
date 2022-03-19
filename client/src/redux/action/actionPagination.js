@@ -18,7 +18,6 @@ export const InitialPaginationData = () => {
 }
 
 export const  getPaginationCurrent = (current) => {
-    console.log('peticon action page current',current);
     return {
         type: GET_PAGINATION_DATA,
         payload: current

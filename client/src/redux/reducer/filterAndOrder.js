@@ -53,7 +53,6 @@ const filter = (state= initialState, action) => {
                 }
             }
         case GET_VIDEOGAMER_FILTER_BY_NAME:
-            console.log('peticonflter name reducer',action.payload);
             return {
                 ...state,
                 filterData: action.payload

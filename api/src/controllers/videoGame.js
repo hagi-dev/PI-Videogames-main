@@ -16,13 +16,14 @@ exports.getById = async (req, res) => {
         console.log("este es el result : ",result[0] && result[0].toJSON());
         result.length===0 ? await axios.get(`https://api.rawg.io/api/games/${idVideoGame}?key=${APIKEY}`)
         .then(response => {
+            let date = new Date(response.data.released);
             result = {
                 id : response.data.id,
-                name : response.data.slug,
+                name : response.data.name,
                 image : response.data.background_image,
                 description : response.data.description_raw,
                 rating : response.data.rating,
-                releaseDate : response.data.released,
+                releaseDate : date.toDateString(),
                 plataform : response.data.parent_platforms.map(element =>{
                     return {
                         id: element.platform.id,

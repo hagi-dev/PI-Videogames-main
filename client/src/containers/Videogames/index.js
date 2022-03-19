@@ -14,6 +14,8 @@ import './style.scss';
 const Videogames = () => {
     const paginateInitial = useSelector(state => state.pagination.paginationData);
     const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
+    const filterData= useSelector(state => state.filterAndOrder.filterData);
+    const videoGames = useSelector(state => state.rootReducer.videoGames);
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -21,10 +23,12 @@ const Videogames = () => {
     }
 
     useEffect(() => {
-        dispatch(getAllVideoGames());
-        dispatch(initialFilterData());
-        dispatch(InitialPaginationData());
-        dispatch(getAllGenres());
+        if(!filterData.length){
+            dispatch(getAllVideoGames());
+            dispatch(initialFilterData());
+            dispatch(InitialPaginationData());
+            dispatch(getAllGenres());
+        }
         
     }, [])
     return (

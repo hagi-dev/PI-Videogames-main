@@ -8,18 +8,20 @@ const VideoGameCard = props => {
     const { videoGame } = props;
     return (
         <Link to={'/videogames/'+videoGame.id} className='videoGameCard'>
-            <dic className='videoGameCard__image'>
+            <div className='videoGameCard__image'>
                 <img src={videoGame.image} alt={videoGame.name} />
-            </dic>
+            </div>
             <div className='videoGameCard__title'>
                 <h3>{videoGame.name}</h3>
             </div>
             <div className='videoGameCard__genres'>
-                {
-                videoGame.genres && videoGame.genres.map(genre => {
-                        return <p key={genre.id}>{genre.name}</p>
-                })
-                }
+                <div className='videoGameCard__genres-container'>
+                    {
+                    videoGame.genres && videoGame.genres.map(genre => {
+                            return <p key={genre.id}>{genre.name}</p>
+                    })
+                    }
+                </div>
             </div>
         </Link>
     )

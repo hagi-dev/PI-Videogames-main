@@ -17,7 +17,6 @@ const Header = () => {
 
    const handleChange = (e) => {
     let changeText = e.target.value;
-    console.log(changeText);
     setSearchText(()=>{
         return {
             ...searchText,
@@ -27,7 +26,7 @@ const Header = () => {
    }
 
    const handleBlur = (e) => {
-       !searchText && setActive(false);
+       !searchText.name && setActive(false);
    }
 
     const handleSubmit = (e) => {

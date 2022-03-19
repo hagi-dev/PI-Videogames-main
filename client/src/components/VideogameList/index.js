@@ -13,11 +13,13 @@ const VideogameList = () => {
   const filterData = useSelector(state => state.filterAndOrder.filterData);
   const paginationData2 = useSelector(state => state.pagination.paginationData);
   const dispatch = useDispatch();
+  const currentPage = useSelector(state => state.pagination.current);
   const requireCountPage = 15;
   const countButton = partPaginationDate(filterData,requireCountPage);
 
   const handleClickPagination = (e) => {
     let currentPage = parseInt(e.target.innerHTML);
+    getPaginationCurrent(currentPage);
     let dataCurrentPage = paginationData(filterData,requireCountPage,currentPage)
     dispatch(getPaginationCurrent(dataCurrentPage));
     dispatch(getPageCurrent(currentPage));
@@ -25,8 +27,7 @@ const VideogameList = () => {
   }
 
   useEffect(()=>{
-    console.log('useEffect filterData: ',filterData);
-    dispatch(getPaginationCurrent(paginationData(filterData,15,1)));
+    dispatch(getPaginationCurrent(paginationData(filterData,15,currentPage)));
   },[filterData]);
 
   return (
