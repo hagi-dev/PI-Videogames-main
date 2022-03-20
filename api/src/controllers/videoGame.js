@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const {Videogame, Videogame_Genres,Op,conn} = require('../db.js');
+const {Videogame, Videogame_Genres,Genre,Op,conn} = require('../db.js');
 
 const {APIKEY} = process.env;
 process.env;
@@ -72,6 +72,9 @@ exports.create = async (req, res) => {
             rating: rating,
             plataform: plataform,
         });
+
+        let rtur= Genre.
+
         genres.forEach( async (item) => {
             console.log('entro ',item);
             await Videogame_Genres.create({

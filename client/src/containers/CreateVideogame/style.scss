@@ -1,0 +1,126 @@
+.createVideoGame {
+  width: 100vw;
+  height: 100vh;
+  max-height: 850px;
+  font-family: "mulish", sans-serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .createVideoGame__container {
+    width: 80%;
+    height: 95%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    max-height: 850px;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: 0.2fr 1.3fr;
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:vertical {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(14, 57, 167, 0.75);
+      border-radius: 20px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .createVideogame__title {
+      width: 100%;
+      height: 80px;
+      h1 {
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+
+    .createVideogame__form {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      max-height: 505px;
+
+      .rows {
+        padding: 0 13%;
+        .createVideogame__form__row {
+          width: 90%;
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          margin: 0 auto;
+        }
+      }
+
+      .createVideogame__form__button {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        .content-button {
+          //a and span
+          display: block;
+          width: 100%;
+          height: 100%;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ffffff;
+        }
+
+        .button {
+          margin-top: 15px;
+          width: 40%;
+          height: 40px;
+          border-radius: 10px;
+          max-width: 200px;
+          margin: 0 10px;
+          font-size: 1rem;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          transition: all 0.3s ease linear;
+          cursor: pointer;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+
+        .v1 {
+          border: 0;
+          background: rgb(49, 106, 254);
+          background: linear-gradient(
+            90deg,
+            rgba(49, 106, 254, 1) 0%,
+            rgba(14, 57, 167, 1) 58%
+          );
+        }
+
+        .v2 {
+          background: none;
+          border: rgb(49, 106, 254) 2px solid;
+          &:hover {
+            border: 0;
+            background: rgb(49, 106, 254);
+            background: linear-gradient(
+              90deg,
+              rgba(49, 106, 254, 1) 0%,
+              rgba(14, 57, 167, 1) 58%
+            );
+          }
+        }
+      }
+    }
+  }
+}

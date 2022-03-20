@@ -6,7 +6,7 @@ import './style.scss';
 const ButtonCreate = props => {
   return (
     <button type="button" className="buttonCreate" onClick={props.handleClick}>
-        <Link to={`/videogames/create`} >
+        <Link to={`/`} >
             <span className="buttonCreate__text">+</span>
         </Link>
     </button>

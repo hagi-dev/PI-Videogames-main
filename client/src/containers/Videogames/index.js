@@ -32,8 +32,7 @@ const Videogames = () => {
         
     }, [])
     return (
-    <div className="videogames" onClick={handleClick} style={{backgroundImage: {Background}}}>
-        <img className="background" src={Background} alt="background"/>
+    <div className="videogames" onClick={handleClick} >
         <div className="videogames__header">
             <Header/>
         </div>
