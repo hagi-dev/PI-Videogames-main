@@ -15,8 +15,6 @@ const LandingPage2 = props => {
   const [stateActivated, setStateActivated] = useState({
     Genre: false, //genre
     CreatedOrExisted: false, //created or existed
-    state3: false, //alphabet or rating
-    state4: false, //asc or desc
   });
   const abstractDataGenre = genre22.map(genre => genre.name);
   const stateSelection = useSelector(

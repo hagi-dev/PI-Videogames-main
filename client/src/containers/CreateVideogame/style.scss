@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: -1;
 
   .createVideoGame__container {
     width: 80%;
@@ -57,6 +58,31 @@
           justify-content: space-around;
           flex-wrap: wrap;
           margin: 0 auto;
+
+          .container_selection{
+            width: 330px;
+            position: relative;
+            margin: 0 10px;
+            .h4 {
+              font-family: "mulish", sans-serif;
+              font-weight: 400;
+              font-size: 15px;
+              position: absolute;
+              color: #ffffff;
+              left: -240px;
+              right: 0;
+              top: 6px;
+              transition: all 0.2s ease-in-out;
+              z-index: 100;
+              cursor: pointer;
+            }
+
+            .h4.activate {
+              transform: translate(0px, -20px);
+              font-size: 12px;
+              color: rgb(160, 160, 165);
+            }
+          }
         }
       }
 

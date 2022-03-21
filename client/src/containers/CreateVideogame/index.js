@@ -4,23 +4,40 @@ import { useSelector, useDispatch } from "react-redux";
 
 import TextField from "../../components/TextField/index";
 import { getAllGenres } from "../../redux/action/actionRoot";
+import { getStateSelection } from "../../redux/action/actionFilterAndOrder";
+import Selection2 from "../../components/Selection2";
 
 import "./style.scss";
 
 const CreateVideogame = () => {
+  const stateSelection = useSelector(
+    state => state.filterAndOrder.stateSelection
+  );
   const dispatch = useDispatch();
   const genres = useSelector(state => state.rootReducer.genres);
-  const platforms = [
+  const options = genres.map(genre => genre.name);
+  const platform = [
     { id: 1, name: "PC" },
     { id: 2, name: "PlayStation" },
     { id: 3, name: "Xbox" },
     { id: 4, name: "Nintendo" },
     { id: 5, name: "Android" },
   ];
+  const dataSelections={
+    platform:platform,
+    genres:genres
+  }
+  const platforms=[
+    "PC",
+    "PlayStation",
+    "Xbox",
+    "Nintendo",
+    "Android",
+  ]
   const [activeLabel, setActiveLabel] = React.useState({
     name: false,
     description: false,
-    release_date: false,
+    release_date: true,
     platform: false,
     genres: false,
     rating: false,
@@ -33,48 +50,41 @@ const CreateVideogame = () => {
     platform: [],
     rating: "",
   });
-  const [genresAndPlatforms, setGenresAndPlatforms] = React.useState({
-    genres: "",
-    platform: "",
-  });
   const removeSelections = (id, array) => {
     setGetData(presset => {
+      let newDataSelection = getData[array].filter(item => item.id !== id);
       return {
         ...presset,
-        [array]: array.filter(element => element.id !== id),
+        [array]: newDataSelection,
       };
     });
   };
   const handleChange = e => {
     //let {name,value} = e.target;
-    console.log("entra en el selector ", e.target.name);
     setGetData({
       ...getData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleChangeSelect = e => {
-    setGenresAndPlatforms(() => {
+  const handleChangeSelect = (name, value) => {
+    setActiveLabel((prevState) => ({
+      ...prevState,
+      [name]: true,
+    }));
+    console.log('name', name);
+    let dataSelection = dataSelections[name].find(element => element.name === value);
+    
+    console.log('state ',dataSelection);
+    setGetData(item => {
       return {
-        ...genresAndPlatforms,
-        [e.target.name]: e.target.value,
+        ...item,
+        [name]: [...item[name], {...dataSelection}],
       };
     });
-    if(e.target.name === "genres"){
-      setGetData({
-        ...getData,
-        genres: [...getData.genres, e.target.value],
-      })
-    }
-    if(e.target.name === "platform"){
-      setGetData({
-        ...getData,
-        platform: [...getData.platform, e.target.value],
-      })
-    }
-  }
-
+    console.log('getData ',getData);
+  };
+  console.log("getData ", getData);
   const handleClick = e => {
     setActiveLabel(() => {
       return {
@@ -92,12 +102,17 @@ const CreateVideogame = () => {
     console.log(getData);
   };
 
+  const handleClickBase = () => {
+    stateSelection.state &&
+      dispatch(getStateSelection({ state: false, name: "" }));
+  };
+
   useEffect(() => {
     dispatch(getAllGenres());
   }, []);
 
   return (
-    <div className="createVideoGame">
+    <div className="createVideoGame" onClick={handleClickBase}>
       <div className="createVideoGame__container">
         <div className="createVideogame__title">
           <h1>Create Videogame</h1>
@@ -136,18 +151,40 @@ const CreateVideogame = () => {
                 clickFunction={handleClick}
                 type={"text"}
               />
-              <TextField
-                active={activeLabel.genres}
-                name={"genres"}
-                value={genresAndPlatforms.genres}
-                blurFunction={handleBlur}
-                stateFunction={handleChangeSelect}
-                clickFunction={handleClick}
-                type={"text"}
-                detail={genres}
-                stateInputSelect={[]}
-                removeFunction={removeSelections}
-              />
+              <div className="container_selection 1">
+                <h4
+                  name={"genres"}
+                  className={`h4 ${
+                    activeLabel.genres ? "activate" : "deactivate"
+                  } `}
+                >
+                  Genres
+                </h4>
+                <Selection2
+                  width={"100%"}
+                  name={"genres"}
+                  version={"v1"}
+                  blurFunction={handleBlur}
+                  functionActiva={handleChangeSelect}
+                  options={options}
+                />
+                <div style={{display:"flex", flexWrap:"wrap"}}>
+                  {
+                    getData.genres.map(genre => {
+                      return (
+                        <div key={genre.id} style={{margin:"2px 3px"}}>
+                          <p>{genre.name}</p>
+                          <button
+                            onClick={() => removeSelections(genre.id, "genres")}
+                          >
+                            X
+                          </button>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              </div>
             </div>
             <div className="createVideogame__form__row 3">
               <TextField
@@ -159,18 +196,40 @@ const CreateVideogame = () => {
                 clickFunction={handleClick}
                 type={"text"}
               />
-              <TextField
-                active={activeLabel.platform}
-                name={"platform"}
-                value={genresAndPlatforms.platform}
-                blurFunction={handleBlur}
-                stateFunction={handleChangeSelect}
-                clickFunction={handleClick}
-                type={"text"}
-                detail={platforms}
-                stateInputSelect={[]}
-                removeFunction={removeSelections}
-              />
+              <div className="container_selection 2">
+                <h4
+                  name={"genres"}
+                  className={`h4 ${
+                    activeLabel.platform ? "activate" : "deactivate"
+                  } `}
+                >
+                  Platform
+                </h4>
+                <Selection2
+                  width={"100%"}
+                  name={"platform"}
+                  version={"v1"}
+                  blurFunction={handleBlur}
+                  functionActiva={handleChangeSelect}
+                  options={platforms}
+                />
+                <div style={{display:"flex", flexWrap:"wrap"}}>
+                  {
+                    getData.platform.map(e => {
+                      return (
+                        <div key={e.id} style={{margin:"2px 3px"}}>
+                          <p>{e.name}</p>
+                          <button
+                            onClick={() => removeSelections(e.id, "genres")}
+                          >
+                            X
+                          </button>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              </div>
             </div>
           </div>
           <div className="createVideogame__form__button">
