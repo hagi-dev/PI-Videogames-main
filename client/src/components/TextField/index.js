@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 
+
 const TextField = props => {
   const {
     type,
@@ -16,67 +17,42 @@ const TextField = props => {
     active,
     textArea,
     removeFunction,
+    require,
+    children,
   } = props;
   return (
     <div className="container_textField">
-      <label className={`label ${active && "active"}`}>{name}</label>
-      {!textArea ?(
+      <label className={`label ${active && "active"}`}>{name}{require && '*'}</label>
+      {!textArea ? (
         <>
-        <input list="data" className= 'textField input'
-          style={{ width: width }}
-          name={name}
-          value={value}
-          onBlur={blurFunction}
-          onChange={stateFunction}
-          onClick={clickFunction}
-          type={type}
-        />
-        <datalist id="data">
-        {detail &&
-          detail.map((item, index) => {
-            return (
-              <option key={index} value={item}>
-                {item.name}
-              </option>
-            );
-          })}
-      </datalist></>) : (<textarea className='textField textArea'
-        style={{ width: width }}
-        name={name}
-        value={value}
-        onBlur={blurFunction}
-        onChange={stateFunction}
-        onClick={clickFunction}
-        type={type}
-      />)
-      }
-      {
-        name==='genres' &&
-          <div className="selection">
-            {
-              stateInputSelect && stateInputSelect.map((element) => {
-                return <div className='genre'>
-                  <button onclick={()=>removeFunction(element.id)}>x</button>
-                  <p key={element.id}>{element.name}</p>
-                </div>
-              })
-            }
-          </div>  
-      }
-      {
-        name==='plataforms' &&
-          <div className="selection">
-            {
-              stateInputSelect && stateInputSelect.map((element) => {
-                return <div className='genre'>
-                  <button onclick={()=>removeFunction(element.id)}>x</button>
-                  <p key={element.id}>{element.name}</p>
-                </div>
-              })
-            }
-          </div>  
-      }
-
+          <input
+            list="data"
+            className="textField input"
+            style={{ width: width }}
+            name={name}
+            value={value}
+            onBlur={blurFunction}
+            onChange={stateFunction}
+            onClick={clickFunction}
+            type={type}
+          />
+          {children}
+        </>
+      ) : (
+        <>
+          <textarea
+            className="textField textArea"
+            style={{ width: width }}
+            name={name}
+            value={value}
+            onBlur={blurFunction}
+            onChange={stateFunction}
+            onClick={clickFunction}
+            type={type}
+          />
+          {children}
+        </>
+      )}
     </div>
   );
 };

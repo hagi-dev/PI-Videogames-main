@@ -33,6 +33,12 @@ exports.getAll = async (req,res) => {
                             name: e.name,
                         }
                     }),
+                    platforms: element.platforms && element.platforms.map(e=>{
+                        return {
+                            id: e.id,
+                            name: e.name,
+                        }
+                    }),
                 }
             });
             //console.log('dataBD',filterDataBd.length);
@@ -59,7 +65,13 @@ exports.getAll = async (req,res) => {
                                 id: element.id,
                                 name: element.name,
                             }
-                        })
+                        }),
+                        platforms: item.parent_platforms && item.parent_platforms.map((element)=>{
+                            return {
+                                id: element.platform.id,
+                                name: element.platform.name,
+                            }
+                        }),
                     }
                 });
                 return result;

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getStateSelection,
-} from "../../redux/action/actionFilterAndOrder";
+import { getStateSelection } from "../../redux/action/actionFilterAndOrder";
 import "./style.scss";
 
 const Selection2 = props => {
   const dispatch = useDispatch();
-  const { options, version, functionActiva, name, width } = props;
+  const { options, version, functionActiva, name, width, children } = props;
   const stateSelection = useSelector(
     state => state.filterAndOrder.stateSelection
   );
@@ -27,43 +25,51 @@ const Selection2 = props => {
     }, 200);
   };
   return (
-    <div style={{width:width}}
-      className={`select ${
-        stateSelection.state && stateSelection.name === name ? "clicked " : ""
-      } ${version} ${options.length < 4 && "short"} ${
-        options.length < 3 && "small"
-      }`}
-    >
+    <>
       <div
-        className={`select__optionSelection ${
-          stateSelection.state && stateSelection.name === name ? "clicked " : ""
-        } ${version}`}
-        onClick={handleClick}
-      >
-        <h2>{textSelection}</h2>
-      </div>
-      <div
-        className={`select__options ${
+        style={{ width: width }}
+        className={`select ${
           stateSelection.state && stateSelection.name === name ? "clicked " : ""
         } ${version} ${options.length < 4 && "short"} ${
           options.length < 3 && "small"
         }`}
       >
-        {options &&
-          options.map((elemet, index) => {
-            return (
-              <div
-                className="option"
-                onClick={handleChange}
-                key={index}
-                value={elemet}
-              >
-                --{elemet}--
-              </div>
-            );
-          })}
+        <div
+          className={`select__optionSelection ${
+            stateSelection.state && stateSelection.name === name
+              ? "clicked "
+              : ""
+          } ${version}`}
+          onClick={handleClick}
+        >
+          <h2>{textSelection}</h2>
+        </div>
+        <div
+          className={`select__options ${
+            stateSelection.state && stateSelection.name === name
+              ? "clicked "
+              : ""
+          } ${version} ${options.length < 4 && "short"} ${
+            options.length < 3 && "small"
+          }`}
+        >
+          {options &&
+            options.map((elemet, index) => {
+              return (
+                <div
+                  className="option"
+                  onClick={handleChange}
+                  key={index}
+                  value={elemet}
+                >
+                  --{elemet}--
+                </div>
+              );
+            })}
+        </div>
       </div>
-    </div>
+      {children}
+    </>
   );
 };
 
@@ -75,8 +81,6 @@ Selection2.propTypes = {
 
 Selection2.defaultProps = {
   width: "300px",
-}
-
-
+};
 
 export default Selection2;

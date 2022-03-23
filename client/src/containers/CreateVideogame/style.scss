@@ -58,8 +58,73 @@
           justify-content: space-around;
           flex-wrap: wrap;
           margin: 0 auto;
+          margin-bottom: 20px;
 
-          .container_selection{
+          .messageInput.error {
+            color: red;
+          }
+
+          .messageInput {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            font-weight: 700;
+            font-size: 14px;
+            color: #316afe;
+          }
+
+          .messageSelect {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #316afe;
+          }
+
+          .messageSelect.error {
+            color: red;
+          }
+
+          .container_select-selection {
+            width: 100%;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            z-index: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            p {
+              line-height: 0;
+              display: flex;
+              align-items: center;
+              font-size: 12px;
+              padding: 5px;
+              border: 2px solid #316afe;
+              height: 10px;
+              border-radius: 5px;
+              position: relative;
+
+              button {
+                border: none;
+                width: 20px;
+                font-size: 9px;
+                font-weight: 900;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #316afe;
+                color: #ffffff;
+                cursor: pointer;
+                position: absolute;
+                top: -10px;
+                right: -14px;
+              }
+            }
+          }
+
+          .container_selection {
             width: 330px;
             position: relative;
             margin: 0 10px;
