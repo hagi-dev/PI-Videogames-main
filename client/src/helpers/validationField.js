@@ -44,7 +44,7 @@ export const validationField = () => {
       };
     }
     return _response;
-  }
+  };
 
   const name = value => {
     return validationInput("_name", value);
@@ -61,10 +61,10 @@ export const validationField = () => {
 
   const platform = value => {
     return validationSelect("_platform", value);
-  }
+  };
   const genres = value => {
     return validationSelect("_genres", value);
-  }
+  };
 
   return {
     name,
