@@ -6,6 +6,7 @@ import {
   getVideogameFilterByName,
 } from "../../redux/action/actionRoot";
 import videogame from "../../assets/img/videogame.png";
+import {formatUpperCase} from '../../helpers/format/formatUpperCase';
 import "./style.scss";
 
 const Header = () => {
@@ -36,8 +37,8 @@ const Header = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(getVideogameByName(searchText.name));
-    dispatch(getVideogameFilterByName(searchText.name));
+    dispatch(getVideogameByName(formatUpperCase(searchText.name)));
+    dispatch(getVideogameFilterByName(formatUpperCase(searchText.name)));
   };
 
   return (

@@ -2,7 +2,7 @@
 export const validationField = () => {
   let _regex = {
     _name: /^.{4,}/,
-    _description: /^[a-zA-Z0-9]+$/,
+    _description: /^^.{20,}/,
     _release_date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
     _rating: /^[0-9]{1,2}|[0-9]{1,2}\.[0-9]{1,2}$/,
   };

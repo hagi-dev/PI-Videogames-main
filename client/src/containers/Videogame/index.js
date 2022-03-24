@@ -8,9 +8,11 @@ import IconPlataform from '../../components/IconPlataform/index';
 import './style.scss';
 
 const Videogame = () => {
+  let imgDefaul = 'https://holatelcel.com/wp-content/uploads/2020/08/mario-bross-google-game--1280x720.png';
   const dispatch = useDispatch();
   const {id} = useParams();
   const videoGame = useSelector(state => state.rootReducer.videoGame);
+  let released= new Date(videoGame.releaseDate).toDateString();
   const [seeDescription, setSeeDescription] = useState({
     see: false,
     orientationName: 'ver mas...',
@@ -36,14 +38,14 @@ const Videogame = () => {
         </Link>
       </div>
       <div className="videogame__image">
-        <img src={videoGame.image} alt={videoGame.name} />
+        <img src={videoGame.image ? videoGame.image : imgDefaul} alt={videoGame.name} />
       </div>
       <div className="videogame__descriptionPart1">
         <div className="videogame__descriptionPart1_title">
           <p>{videoGame.name}</p>
         </div>
         <div className="videogame__descriptionPart1_released">
-          <h3>Released : {videoGame.releaseDate}</h3>
+          <h3>Released : {released}</h3>
         </div>
         <div className="videogame__descriptionPart1_rating">
           <h3>Rating : {videoGame.rating} point</h3>
@@ -71,7 +73,7 @@ const Videogame = () => {
           <h3>Available Plataforms</h3>
           <div className="videogame__descriptionPart2_plataform-icons">
             {videoGame.plataform && videoGame.plataform.map((element,index)=>{
-              return <IconPlataform key={element.id} plataform={element.name} />
+              return <IconPlataform key={index} plataform={element} />
             })}
           </div>
         </div>

@@ -9,6 +9,7 @@ import Selection2 from "../../components/Selection2";
 import { validationField } from "../../helpers/validationField";
 import { platforms, platformsSelect } from "../../helpers/platformAndGenres";
 import { messageGuide } from "../../helpers/guideCreateVideogame";
+import {methodsPost} from '../../services/post';
 
 import "./style.scss";
 
@@ -83,7 +84,9 @@ const CreateVideogame = () => {
     let dataSelection = dataSelections[name].find(
       element => element.name === value
     );
-    setGetData(item => {
+    let exited = getData[name].find(element => element.id === dataSelection.id);
+    console.log('exited  ',exited);
+    !exited && setGetData(item => {
       return {
         ...item,
         [name]: [...item[name], { ...dataSelection }],
@@ -110,9 +113,11 @@ const CreateVideogame = () => {
     });
     console.log(error);
   };
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(getData);
+    let response = await methodsPost(getData);
+    console.log(response);
+    alert(response.data.message);
   };
 
   const handleClickBase = () => {
@@ -185,7 +190,7 @@ const CreateVideogame = () => {
                 type={"text"}
               >
                 <p
-                  className={`messageInput ${
+                  className={`messageInput textArea ${
                     error.description.state ? "error" : ""
                   }`}
                 >
@@ -194,7 +199,7 @@ const CreateVideogame = () => {
                     : messageGuide.description}
                 </p>
               </TextField>
-              <div className="container_selection 1">
+              <div className="container_selection 1 ">
                 <h4
                   name={"genres"}
                   className={`h4 ${

@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 
 const VideoGameCard = props => {
+    let imgDefaul = 'https://holatelcel.com/wp-content/uploads/2020/08/mario-bross-google-game--1280x720.png';
     const { videoGame } = props;
     return (
         <Link to={'/videogames/'+videoGame.id} className='videoGameCard'>
             <div className='videoGameCard__image'>
-                <img src={videoGame.image} alt={videoGame.name} />
+                <img src={videoGame.image ? videoGame.image : imgDefaul} alt={videoGame.name} />
             </div>
             <div className='videoGameCard__title'>
                 <h3>{videoGame.name}</h3>
