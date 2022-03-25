@@ -26,7 +26,7 @@ exports.getAll = async (req, res) => {
     /////////////////////////////////////////////////////////////////////////////////////////////
       // req all
     if (!name) {
-      const requireData = async (page = 1, dataRes = []) => {
+      const requireDataApi = async (page = 1, dataRes = []) => {
         let data1 = await axios.get(
           `https://api.rawg.io/api/games?key=${APIKEY}&page=${page}`
         );
@@ -35,9 +35,9 @@ exports.getAll = async (req, res) => {
           return dataRes;
         }
         page++;
-        return requireData(page, dataRes);
+        return requireDataApi(page, dataRes);
       };
-      const DataApi = await requireData();
+      const DataApi = await requireDataApi();
       const formatDataApi = DataApi.map(element => {
         return formatObjetHome(element);
       });

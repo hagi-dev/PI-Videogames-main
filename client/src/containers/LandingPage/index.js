@@ -58,7 +58,7 @@ useEffect(() => {
 
   return (
     <div className="landingPage" onClick={handleClick}>
-      <div className="filterAndOrder__containerFilter">
+      {/* <div className="filterAndOrder__containerFilter">
         <h5>Filter:</h5>
         <div
           className="filterAndOrder__filterGenre"
@@ -127,7 +127,7 @@ useEffect(() => {
             }}>{filter.name}</p>
           })
         }
-      </div>
+      </div> */}
     </div>
   );
 };

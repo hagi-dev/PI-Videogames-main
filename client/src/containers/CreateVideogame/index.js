@@ -208,7 +208,7 @@ const CreateVideogame = () => {
                   name={"genres"}
                   version={"v1"}
                   blurFunction={handleBlur}
-                  functionActiva={handleChangeSelect}
+                  onchange={handleChangeSelect}
                   options={options}
                 >
                   <div
@@ -278,7 +278,7 @@ const CreateVideogame = () => {
                   name={"platform"}
                   version={"v1"}
                   blurFunction={handleBlur}
-                  functionActiva={handleChangeSelect}
+                  onchange={handleChangeSelect}
                   options={platformsSelect}
                 >
                   <div className="container_select-selection">

@@ -83,6 +83,15 @@
         transform: translateY(-20px);
       }
     }
+    .header__image:active{
+      img:active{
+        transform: scale(0.88);
+      }
+      p:active{
+        transform: translateY(-22px);
+      }
+
+    }
   }
 
   .header__formSearch {

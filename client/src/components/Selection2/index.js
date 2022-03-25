@@ -7,7 +7,7 @@ import "./style.scss";
 
 const Selection2 = props => {
   const dispatch = useDispatch();
-  const { options, version, functionActiva, name, width, children } = props;
+  const { options, version, name, width, children, onchange } = props;
   const stateSelection = useSelector(
     state => state.filterAndOrder.stateSelection
   );
@@ -18,7 +18,7 @@ const Selection2 = props => {
   };
   const handleChange = async e => {
     let replaces = e.target.innerText.trim().replace(/\-/g, "");
-    functionActiva(name, replaces);
+    onchange(name, replaces);
     dispatch(getStateSelection({ state: !stateSelection.state, name: name }));
     setTimeout(() => {
       setTextSelection(replaces);

@@ -50,7 +50,7 @@ const VideogameList = () => {
             }) 
         }
         {
-          paginationData2.length < 15 ? 
+          videoGames.length < 15 ? 
             console.log('videoGames cacacacacacacacacacacacaca')
           : <Pagination currentPage={currentPage} countButton={countButton} handleClickPagination={handleClickPagination}/>
         }

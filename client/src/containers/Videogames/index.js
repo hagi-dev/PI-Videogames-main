@@ -37,7 +37,7 @@ const Videogames = () => {
             <Header/>
         </div>
         <div className="videogames__body">
-            <FilterAndOrder/>
+            <FilterAndOrder videoGames={videoGames}/>
             <VideogameList data={paginateInitial}/>
         </div>
         <div className="videogames__buttonCreate">
