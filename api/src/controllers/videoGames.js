@@ -11,7 +11,6 @@ exports.getAll = async (req, res) => {
   let result = [];
   const { name } = req.query;
   let countData = 100;
-  console.log("biene name ", name);
   try {
     const options = name ? { name: { [Op.like]: `%${name}%` } } : {};
     let dataBD = await Videogame.findAll({

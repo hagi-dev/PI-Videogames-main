@@ -85,7 +85,6 @@ const CreateVideogame = () => {
       element => element.name === value
     );
     let exited = getData[name].find(element => element.id === dataSelection.id);
-    console.log('exited  ',exited);
     !exited && setGetData(item => {
       return {
         ...item,
@@ -104,19 +103,16 @@ const CreateVideogame = () => {
   const handleBlur = e => {
     let { name, value } = e.target;
     let { state, message } = fieldValidation[name](value);
-    console.log(name, " ", value);
     setError(() => {
       return {
         ...error,
         [name]: { state, message },
       };
     });
-    console.log(error);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     let response = await methodsPost(getData);
-    console.log(response);
     alert(response.data.message);
   };
 
@@ -131,7 +127,6 @@ const CreateVideogame = () => {
 
   return (
     <div className="createVideoGame" onClick={handleClickBase}>
-      {console.log(error)}
       <div className="createVideoGame__container">
         <div className="createVideogame__title">
           <h1>Create Videogame</h1>

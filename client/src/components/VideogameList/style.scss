@@ -12,6 +12,7 @@
     justify-content: space-between;
     padding: 0 20px;
     padding-top: 10px;
+    position: relative;
     &::-webkit-scrollbar{
         -webkit-appearance: none;
     }
@@ -26,4 +27,6 @@
     &::-webkit-scrollbar-track{
         background: transparent;
     }
+
+    
 }

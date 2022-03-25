@@ -4,9 +4,18 @@ import PropTypes from 'prop-types';
 import './styleButton.scss';
 
 const Button = props => {
-    const {handleClickPagination, text} = props
+    const {handleClickPagination, text, state,functionChange} = props;
   return (
-    <div className="Button" onClick={handleClickPagination}>
+    <div className={`Button ${state ? 'current' : ''}`} onClick={
+      (e) => {
+        handleClickPagination(e);
+        functionChange((item)=>{
+          return {
+            [text]: true
+          };
+        });
+      }
+    }>
         <button type="button" className="button" >{text}</button>
     </div>
   )
@@ -14,7 +23,9 @@ const Button = props => {
 
 Button.propTypes = {
     handleClickPagination: PropTypes.func,
-    text: PropTypes.number
+    text: PropTypes.number,
+    current: PropTypes.bool
 }
+
 
 export default Button;

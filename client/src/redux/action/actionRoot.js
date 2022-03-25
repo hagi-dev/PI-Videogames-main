@@ -16,6 +16,10 @@ export const getAllVideoGames = () => {
                 });
             })
             .catch((err) => {
+                dispatch({
+                    type: GET_ALL_VIDEOGAMERS,
+                    payload: []
+                });
                 console.log(err);
             });
     }

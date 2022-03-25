@@ -80,7 +80,7 @@ Selection2.propTypes = {
 };
 
 Selection2.defaultProps = {
-  width: "300px",
+  width: "150px;",
 };
 
 export default Selection2;

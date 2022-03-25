@@ -238,6 +238,11 @@
         }
         .videogame__descriptionPart2_description.see{
             height:145%;
+            .videogame__descriptionPart2_decription-paragraph{
+                div{
+                    overflow:auto;
+                }
+            }
         }
     }
 }

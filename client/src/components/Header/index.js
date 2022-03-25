@@ -52,6 +52,7 @@ const Header = () => {
       </div>
       <div className="header__image">
         <img src={videogame} alt="videogame" />
+        <p>Home</p>
       </div>
       <div className="header__formSearch">
         <form onSubmit={handleSubmit}>

@@ -1,6 +1,9 @@
 export function paginationData (data,subPart,page) {
     let paginationData = [];
-    if(data.length===subPart){
+    if( !data || data.length===0){
+        return [];
+    }
+    if(data.length<=subPart){
         return data;
     }
     if (data.length > subPart){
@@ -13,6 +16,9 @@ export function partPaginationDate (data,subPart) {
     let part = 1;
     let rest = 0;
     let pagination= [];
+    if( !data || data.length===0){
+        return [];
+    }
     if(data.length < subPart){
         pagination.push(1);
         return pagination;

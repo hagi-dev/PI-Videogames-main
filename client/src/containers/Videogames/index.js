@@ -23,7 +23,7 @@ const Videogames = () => {
     }
 
     useEffect(() => {
-        if(!filterData.length){
+        if( !filterData.length){
             dispatch(getAllVideoGames());
             dispatch(initialFilterData());
             dispatch(InitialPaginationData());
