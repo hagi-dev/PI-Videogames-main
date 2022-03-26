@@ -9,6 +9,7 @@ export const GET_ORDER_DATA = 'GET_ORDER_DATA';
 export const GET_STATE_SELECTION = 'GET_STATE_SELECTION';
 export const GET_FILTER = 'GET_FILTER';
 export const RESET_FILTER = 'RESET_FILTER';
+export const GET_FILTER_AND_ORDER_TEXT= 'GET_FILTER_AND_ORDER_TEXT';
 
 export const getFilterCreatedOrExisted = (option) => {
     return {
@@ -17,9 +18,9 @@ export const getFilterCreatedOrExisted = (option) => {
     }
 }
 
-export const getFilterGenre = (option) => {
+export const getFilterAndOrderText = (option) => {
     return {
-        type: GET_FILTER_GENRE,
+        type: GET_FILTER_AND_ORDER_TEXT,
         payload: option
     }
 }

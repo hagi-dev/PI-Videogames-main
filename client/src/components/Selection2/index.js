@@ -7,11 +7,11 @@ import "./style.scss";
 
 const Selection2 = props => {
   const dispatch = useDispatch();
-  const { options, version, name, width, children, onchange } = props;
+  const { options, version, name, width, children, onchange , value } = props;
   const stateSelection = useSelector(
     state => state.filterAndOrder.stateSelection
   );
-  const [textSelection, setTextSelection] = useState("");
+  const [textSelection, setTextSelection] = useState(value);
 
   const handleClick = e => {
     dispatch(getStateSelection({ state: !stateSelection.state, name: name }));

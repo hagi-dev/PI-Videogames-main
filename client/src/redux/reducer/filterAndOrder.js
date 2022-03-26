@@ -7,7 +7,8 @@ import {
   GET_ORDER_DATA,
   GET_STATE_SELECTION,
   GET_FILTER,
-  RESET_FILTER
+  RESET_FILTER,
+  GET_FILTER_AND_ORDER_TEXT,
 } from "../action/actionFilterAndOrder";
 import { GET_VIDEOGAMER_FILTER_BY_NAME } from "../action/actionRoot";
 
@@ -16,11 +17,9 @@ import orderDate from "../../helpers/order";
 
 const initialState = {
   filterData: [],
-  stateFilter: {
+  stateTextFilterAndOrder: {
     createdOrExisted: "",
     genre: "",
-  },
-  stateOrder: {
     alphabetOrRating: "",
     order: "",
   },
@@ -37,12 +36,13 @@ const filter = (state = initialState, action) => {
         ...state,
         filterData: action.payload,
       };
-    case GET_FILTER_CREATED_EXISTED:
+    case GET_FILTER_AND_ORDER_TEXT:
+      console.log("GET_FILTER_AND_ORDER_TEXT", action.payload);
       return {
         ...state,
-        stateFilter: {
-          ...state.stateFilter,
-          createdOrExisted: action.payload,
+        stateTextFilterAndOrder: {
+          ...state.stateTextFilterAndOrder,
+          [action.payload.name]: action.payload.value,
         },
       };
     case GET_FILTER_GENRE:
@@ -74,8 +74,9 @@ const filter = (state = initialState, action) => {
           order: action.payload,
         },
       };
+
     case GET_FILTER_DATA:
-      console.log("ingresa filterDate reducer",action.payload)
+      console.log("ingresa filterDate reducer", action.payload);
       let dataFilter = filterDate(
         action.payload.videoGames,
         action.payload.createdOrExisted,
@@ -88,13 +89,13 @@ const filter = (state = initialState, action) => {
       };
 
     case GET_ORDER_DATA:
-        console.log("ingresa get reducer order",action.payload)
+      console.log("ingresa get reducer order", action.payload);
       let dataOrder = orderDate(
         action.payload.videoGames,
         action.payload.alphabetOrRating,
         action.payload.order
       );
-      console.log("retorna get reducer order",dataOrder)
+      console.log("retorna get reducer order", dataOrder);
       return {
         ...state,
         filterData: dataOrder,
@@ -109,14 +110,14 @@ const filter = (state = initialState, action) => {
         },
       };
     case RESET_FILTER:
-        return {
-            ...state,
-            stateSelection: {
-                name: "",
-                state: false,
-            },
-            filterData: [],
-        } 
+      return {
+        ...state,
+        stateSelection: {
+          name: "",
+          state: false,
+        },
+        filterData: [],
+      };
     default:
       return state;
   }
