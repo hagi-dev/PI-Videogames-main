@@ -1,41 +1,42 @@
 import {
-    GET_PAGINATION_DATA,
-    RESET_PAGINATION,
-    INITIAL_PAGINATE_DATA,
-    GET_PAGE_CURRENT
-} from '../action/actionPagination.js';
+  GET_PAGINATION_DATA,
+  RESET_PAGINATION,
+  INITIAL_PAGINATE_DATA,
+  GET_PAGE_CURRENT,
+} from "../action/actionPagination.js";
 
 const initialState = {
-    paginationData: [],
-    current: 1,
-}
+  paginationData: [],
+  current: 1,
+};
 
-const paginate = (state= initialState, action) => {
-    switch(action.type){
-        case INITIAL_PAGINATE_DATA:
-            let dataInitial =  action.payload && action.payload.slice(0,15);
-            return {
-                ...state,
-                paginationData: dataInitial
-            }
-        case GET_PAGINATION_DATA:
-            return {
-                ...state,
-                paginationData: action.payload
-            }
-        case GET_PAGE_CURRENT:
-            return {
-                ...state,
-                current: action.payload
-            }    
-        case RESET_PAGINATION:
-            return {
-                ...state,
-                current: 1
-            }
-        default:
-            return state;
-    }
-}
+const paginate = (state = initialState, action) => {
+  switch (action.type) {
+    case INITIAL_PAGINATE_DATA:
+        console.log(action.payload);
+      let dataInitial = action.payload && action.payload.slice(0, 15);
+      return {
+        ...state,
+        paginationData: dataInitial,
+      };
+    case GET_PAGINATION_DATA:
+      return {
+        ...state,
+        paginationData: action.payload,
+      };
+    case GET_PAGE_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
+      };
+    case RESET_PAGINATION:
+      return {
+        ...state,
+        current: 1,
+      };
+    default:
+      return state;
+  }
+};
 
 export default paginate;

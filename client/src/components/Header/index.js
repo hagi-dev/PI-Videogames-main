@@ -38,7 +38,6 @@ const Header = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(getVideogameByName(formatUpperCase(searchText.name)));
-    dispatch(getVideogameFilterByName(formatUpperCase(searchText.name)));
   };
 
   return (

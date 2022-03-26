@@ -182,6 +182,20 @@
                     width: 100%;
                     height: 100%;
                     overflow: hidden;
+                    &::-webkit-scrollbar{
+                        -webkit-appearance: none;
+                    }
+                    &::-webkit-scrollbar:vertical{
+                        width:10px;
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        background-color: rgba(14,57,167,0.75);
+                        border-radius: 20px;
+                        border: 2px solid rgba(0,0,0,0.3);
+                    }
+                    &::-webkit-scrollbar-track{
+                        background: transparent;
+                    }
 
                     p{
                         margin: 0;

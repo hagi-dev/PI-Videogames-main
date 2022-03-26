@@ -57,17 +57,17 @@ export const getStateSelection = (data) =>{
         payload: data
     }
 }
-export const initialFilterData = () => {
-    return (dispatch)=>{
-        axios.get('http://localhost:3001/videoGames')
-        .then(response => {
-            dispatch({type: GET_FILTER, payload: response.data.resData})
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
-}
+// export const initialFilterData = () => {
+//     return (dispatch)=>{
+//         axios.get('http://localhost:3001/videoGames')
+//         .then(response => {
+//             dispatch({type: GET_FILTER, payload: response.data.resData})
+//         })
+//         .catch(error => {
+//             console.log(error)
+//         })
+//     }
+// }
 
 export const getPaginationCurrent = (current) => {
     return {
