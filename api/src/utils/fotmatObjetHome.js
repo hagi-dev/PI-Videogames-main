@@ -3,6 +3,7 @@ exports.formatObjetHome = (data)=>{
         id: data.id,
         name: data.name,
         image: data.background_image ? data.background_image : null,
+        rating: data.rating,
         genres: data.genres && data.genres.map(e => {
         return {
             id: e.id,

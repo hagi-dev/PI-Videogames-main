@@ -76,11 +76,10 @@ const Selection2 = props => {
 Selection2.propTypes = {
   name: PropTypes.string,
   options: PropTypes.array,
-  width: PropTypes.string,
 };
 
 Selection2.defaultProps = {
-  width: "150px;",
+  width: "150px",
 };
 
 export default Selection2;

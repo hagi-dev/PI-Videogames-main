@@ -12,6 +12,7 @@ import './style.scss';
 
 const VideogameList = () => {  
   const numCardLoader= new Array(14).fill(0);
+  const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
   const filterData = useSelector(state => state.filterAndOrder.filterData);
   const videoGames = useSelector(state => state.rootReducer.videoGames);
   const paginationData2 = useSelector(state => state.pagination.paginationData);
@@ -30,6 +31,7 @@ const VideogameList = () => {
   }
 
   useEffect(()=>{
+    console.log('useEffect list');
     dispatch(getPaginationCurrent(paginationData(filterData,15,currentPage)));
   },[filterData]);
 
@@ -51,12 +53,10 @@ const VideogameList = () => {
         }
         {
           videoGames.length < 15 ? 
-            console.log('videoGames cacacacacacacacacacacacaca')
+          ''
           : <Pagination currentPage={currentPage} countButton={countButton} handleClickPagination={handleClickPagination}/>
         }
-        {
-          console.log('paginationData2',paginationData2.length)
-        }
+
     </div>
   )
 }

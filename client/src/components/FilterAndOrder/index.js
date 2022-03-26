@@ -2,12 +2,24 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Selection from "../Selection2/index";
-import { getFilterData, getOrderData } from "../../redux/action/actionFilterAndOrder";
+import {
+  getFilterData,
+  getOrderData,
+} from "../../redux/action/actionFilterAndOrder";
+import {
+  getPaginationCurrent,
+  getPageCurrent,
+} from "../../redux/action/actionPagination";
+import { paginationData } from "../../helpers/pagination";
 import "./style.scss";
 
 const FilterAndOrder = props => {
   const { videoGames } = props;
+  const stateSelection = useSelector(
+    state => state.filterAndOrder.stateSelection
+  );
   const genre22 = useSelector(state => state.rootReducer.genres);
+  const filterData = useSelector(state => state.filterAndOrder.filterData);
   const dispatch = useDispatch();
   const [stateActivatedLabel, setStateActivatedLabel] = useState({
     Genre: false,
@@ -27,7 +39,7 @@ const FilterAndOrder = props => {
   const alphabetOrRating = ["alphabet", "rating"];
   const ascOrDesc = ["asc", "desc"];
 
-  const onChange = (name, value) => {
+  const onChangeFilter = (name, value) => {
     setStateActivatedLabel(prevState => {
       return {
         ...prevState,
@@ -47,9 +59,44 @@ const FilterAndOrder = props => {
             ? value
             : stateSelectData.CreatedOrExisted,
       })
-      
     );
   };
+
+  const onChangeOrder = (name, value) => {
+    setStateActivatedLabel(prevState => {
+      return {
+        ...prevState,
+        [name]: true,
+      };
+    });
+    setStateSelectData(etem => {
+      return { ...etem, [name]: value };
+    });
+    dispatch(
+      dispatch(
+        getOrderData({
+          videoGames: filterData,
+          order: name === "AscOrDesc" ? value : stateSelectData.AscOrDesc,
+          alphabetOrRating:
+            name === "AlphabetOrRating"
+              ? value
+              : stateSelectData.AlphabetOrRating,
+        })
+      )
+    );
+    dispatch(getPaginationCurrent(paginationData(filterData, 15, 1)));
+    dispatch(getPageCurrent(1));
+  };
+
+  React.useEffect(() => {
+    dispatch(
+      getOrderData({
+        videoGames: filterData,
+        order: stateSelectData.AscOrDesc,
+        alphabetOrRating: stateSelectData.AlphabetOrRating,
+      })
+    );
+  }, [stateSelection.state]);
 
   return (
     <div className="filterAndOrder">
@@ -64,7 +111,7 @@ const FilterAndOrder = props => {
             Genre
           </h4>
           <Selection
-            onchange={onChange}
+            onchange={onChangeFilter}
             options={genres}
             version={"v1"}
             name={"Genre"}
@@ -79,7 +126,7 @@ const FilterAndOrder = props => {
             Created Or Existed
           </h4>
           <Selection
-            onchange={onChange}
+            onchange={onChangeFilter}
             options={createdOrExisted}
             version={"v2"}
             name={"CreatedOrExisted"}
@@ -91,7 +138,7 @@ const FilterAndOrder = props => {
         <div className="filterAndOrder__OrderAlphabetOrRating">
           <h4
             className={`h4 ${
-              stateActivatedLabel["AlphabetorRating"]
+              stateActivatedLabel["AlphabetOrRating"]
                 ? "activate"
                 : "deactivate"
             } `}
@@ -99,25 +146,25 @@ const FilterAndOrder = props => {
             Alphabet or Rating
           </h4>
           <Selection
-            onchange={onChange}
+            onchange={onChangeOrder}
             options={alphabetOrRating}
             version={"v1"}
-            name={"AlphabetorRating"}
+            name={"AlphabetOrRating"}
           />
         </div>
         <div className="filterAndOrder__OrderAscOrDesc">
           <h4
             className={`h4 ${
-              stateActivatedLabel["AscorDesc"] ? "activate" : "deactivate"
+              stateActivatedLabel["AscOrDesc"] ? "activate" : "deactivate"
             } `}
           >
             Asc or Desc
           </h4>
           <Selection
-            onchange={onChange}
+            onchange={onChangeOrder}
             options={ascOrDesc}
             version={"v2"}
-            name={"AscorDesc"}
+            name={"AscOrDesc"}
           />
         </div>
       </div>
