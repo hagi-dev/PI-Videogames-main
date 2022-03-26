@@ -1,12 +1,7 @@
 import {
-  GET_FILTER_CREATED_EXISTED,
-  GET_FILTER_GENRE,
-  GET_ORDER_ALPHABET_RATING,
-  GET_ORDER_ASCENDING_DESCENDING,
   GET_FILTER_DATA,
   GET_ORDER_DATA,
   GET_STATE_SELECTION,
-  GET_FILTER,
   RESET_FILTER,
   GET_FILTER_AND_ORDER_TEXT,
 } from "../action/actionFilterAndOrder";
@@ -31,11 +26,6 @@ const initialState = {
 
 const filter = (state = initialState, action) => {
   switch (action.type) {
-    case GET_FILTER:
-      return {
-        ...state,
-        filterData: action.payload,
-      };
     case GET_FILTER_AND_ORDER_TEXT:
       console.log("GET_FILTER_AND_ORDER_TEXT", action.payload);
       return {
@@ -45,38 +35,13 @@ const filter = (state = initialState, action) => {
           [action.payload.name]: action.payload.value,
         },
       };
-    case GET_FILTER_GENRE:
-      return {
-        ...state,
-        stateFilter: {
-          ...state.stateFilter,
-          genre: action.payload,
-        },
-      };
     case GET_VIDEOGAMER_FILTER_BY_NAME:
       return {
         ...state,
         filterData: action.payload,
       };
-    case GET_ORDER_ALPHABET_RATING:
-      return {
-        ...state,
-        stateOrder: {
-          ...state.stateOrder,
-          alphabetOrRating: action.payload,
-        },
-      };
-    case GET_ORDER_ASCENDING_DESCENDING:
-      return {
-        ...state,
-        stateOrder: {
-          ...state.stateOrder,
-          order: action.payload,
-        },
-      };
 
     case GET_FILTER_DATA:
-      console.log("ingresa filterDate reducer", action.payload);
       let dataFilter = filterDate(
         action.payload.videoGames,
         action.payload.createdOrExisted,
@@ -89,13 +54,11 @@ const filter = (state = initialState, action) => {
       };
 
     case GET_ORDER_DATA:
-      console.log("ingresa get reducer order", action.payload);
       let dataOrder = orderDate(
         action.payload.videoGames,
         action.payload.alphabetOrRating,
         action.payload.order
       );
-      console.log("retorna get reducer order", dataOrder);
       return {
         ...state,
         filterData: dataOrder,

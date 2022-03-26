@@ -12,43 +12,38 @@ import { paginationData } from "../../helpers/pagination";
 import "./style.scss";
 
 const FilterAndOrder = props => {
+  const dispatch = useDispatch();
+  const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
   const stateTextFilterAndOrder = useSelector(
     state => state.filterAndOrder.stateTextFilterAndOrder
   );
   const { videoGames } = props;
-  const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
-  const genre22 = useSelector(state => state.rootReducer.genres);
+  const genresData = useSelector(state => state.rootReducer.genres);
   const filterData = useSelector(state => state.filterAndOrder.filterData);
-  const dispatch = useDispatch();
   const [stateActivatedLabel, setStateActivatedLabel] = useState({
     genre: stateTextFilterAndOrder.genre.length ? true : false,
     createdOrExisted: stateTextFilterAndOrder.createdOrExisted.length ? true : false,
     alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating.length ? true : false,
     order: stateTextFilterAndOrder.order.length ? true : false,
   });
-  const [stateSelectData, setStateSelectData] = useState({
-    genre: "",
-    createdOrExisted: "",
-    alphabetOrRating: "",
-    order: "",
-  });
-  const abstractDataGenre = genre22.map(genre => genre.name);
+  const abstractDataGenre = genresData.map(genre => genre.name);
   const genres = ["all", ...abstractDataGenre];
   const createdOrExisted = ["all", "existed", "created"];
   const alphabetOrRating = ["alphabet", "rating"];
   const ascOrDesc = ["asc", "desc"];
 
-  const onChangeFilter = (name, value) => {
-    dispatch(getFilterAndOrderText({ name, value }));
+  const changeStateLabel = name => {
     setStateActivatedLabel(prevState => {
       return {
         ...prevState,
         [name]: true,
       };
     });
-    setStateSelectData(etem => {
-      return { ...etem, [name]: value };
-    });
+  };
+
+  const onChangeFilter = (name, value) => {
+    dispatch(getFilterAndOrderText({ name, value }));
+    changeStateLabel(name);
     dispatch(
       getFilterData({
         videoGames: videoGames.resData,
@@ -62,47 +57,35 @@ const FilterAndOrder = props => {
 
   const onChangeOrder = (name, value) => {
     dispatch(getFilterAndOrderText({ name, value }));
-    setStateActivatedLabel(prevState => {
-      return {
-        ...prevState,
-        [name]: true,
-      };
-    });
-    setStateSelectData(etem => {
-      return { ...etem, [name]: value };
-    });
+    changeStateLabel(name);
     dispatch(
-      dispatch(
-        getOrderData({
-          videoGames: filterData,
-          order: name === "order" ? value : stateTextFilterAndOrder.order,
-          alphabetOrRating:
-            name === "alphabetOrRating" ? value : stateTextFilterAndOrder.alphabetOrRating,
-        })
-      )
-    );
+      getOrderData({
+        videoGames: filterData,
+        order: name === "order" ? value : stateTextFilterAndOrder.order,
+        alphabetOrRating:
+          name === "alphabetOrRating" ? value : stateTextFilterAndOrder.alphabetOrRating,
+      })
+    )
     dispatch(getPaginationCurrent(paginationData(filterData, 15, 1)));
     dispatch(getPageCurrent(1));
   };
 
   React.useEffect(() => {
-    console.log("useEffect FilterAndOrder archivo ", stateTextFilterAndOrder);
-    dispatch(
-      getFilterData({
-        videoGames: videoGames.resData,
-        dbCount: videoGames.dbCount,
-        genre: stateSelectData.genre,
-        createdOrExisted: stateSelectData.createdOrExisted,
-      })
-    );
     dispatch(
       getOrderData({
         videoGames: filterData,
-        order: stateSelectData.ascOrDesc,
-        alphabetOrRating: stateSelectData.alphabetOrRating,
+        order: stateTextFilterAndOrder.order,
+        alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating,
+      })
+    )
+    dispatch(
+      getOrderData({
+        videoGames: filterData,
+        order: stateTextFilterAndOrder.order,
+        alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating,
       })
     );
-  }, [stateSelection.state]);
+  },[stateSelection.state]);
 
   return (
     <div className="filterAndOrder">

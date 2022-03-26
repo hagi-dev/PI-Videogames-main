@@ -2,11 +2,11 @@ import { Routes , Route} from 'react-router-dom';
 
 import './App.css';
 import './helpers/format/normalize.css';
-import Videogames from './containers/Videogames';
+import Videogames from './pages/Videogames';
 import Background from './assets/img/background.png';
-import Videogame from './containers/Videogame';
-import CreateVideogame from './containers/CreateVideogame';
-import LandingPage from './containers/LandingPage/index';
+import Videogame from './pages/Videogame';
+import CreateVideogame from './pages/CreateVideogame';
+import LandingPage from './pages/LandingPage/index';
 
 
 function App() {
