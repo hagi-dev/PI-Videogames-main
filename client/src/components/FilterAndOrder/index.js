@@ -52,7 +52,7 @@ const FilterAndOrder = props => {
     dispatch(
       getFilterData({
         videoGames: videoGames.resData,
-        apiCount: videoGames.apiCount,
+        dbCount: videoGames.dbCount,
         genre: name === "Genre" ? value : stateSelectData.Genre,
         createdOrExisted:
           name === "CreatedOrExisted"
@@ -90,19 +90,19 @@ const FilterAndOrder = props => {
 
   React.useEffect(() => {
     dispatch(
+      getFilterData({
+        videoGames: videoGames.resData,
+        dbCount: videoGames.dbCount,
+        genre: stateSelectData.Genre,
+        createdOrExisted:
+          stateSelectData.CreatedOrExisted,
+      })
+    );
+    dispatch(
       getOrderData({
         videoGames: filterData,
         order: stateSelectData.AscOrDesc,
         alphabetOrRating: stateSelectData.AlphabetOrRating,
-      })
-    );
-    dispatch(
-      getFilterData({
-        videoGames: videoGames.resData,
-        apiCount: videoGames.apiCount,
-        genre: stateSelectData.Genre,
-        createdOrExisted:
-          stateSelectData.CreatedOrExisted,
       })
     );
   }, [stateSelection.state]);

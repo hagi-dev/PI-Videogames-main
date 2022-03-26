@@ -46,7 +46,7 @@ exports.getAll = async (req, res) => {
         dbCount: filterDataBd.length,
         apiCount: formatDataApi.length,
         count: formatDataApi.length + filterDataBd.length,
-        resData: [...formatDataApi, ...filterDataBd],
+        resData: [...filterDataBd,...formatDataApi],
       });
 
       /////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,12 +63,14 @@ exports.getAll = async (req, res) => {
         result = dataCompletedApiBd.slice(0, 15);
         return res.status(200).json({
           apiCount: apiData1.length,
+          dbCount: filterDataBd.length,
           count: apiData1.length + filterDataBd.length,
           resData: [...result],
         });
       }
       res.status(200).json({
         apiCount: apiData1.length,
+        dbCount: filterDataBd.length,
         count: apiData1.length + filterDataBd.length,
         resData: [...dataCompletedApiBd],
       });

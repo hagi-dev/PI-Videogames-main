@@ -75,11 +75,12 @@ const filter = (state = initialState, action) => {
         },
       };
     case GET_FILTER_DATA:
+      console.log("ingresa filterDate reducer",action.payload)
       let dataFilter = filterDate(
         action.payload.videoGames,
         action.payload.createdOrExisted,
         action.payload.genre,
-        action.payload.apiCount
+        action.payload.dbCount
       );
       return {
         ...state,

@@ -16,6 +16,7 @@ const Header = () => {
   const [active, setActive] = useState(false);
   const [searchText, setSearchText] = useState({
     name: "",
+    title:"Home"
   });
   const dispatch = useDispatch();
   const handleClickInput = (e) => {
@@ -40,13 +41,22 @@ const Header = () => {
     });
   };
 
-  const handleBlur = e => {
-      console.log('este es el evento blur  ', e);
+  // const handleBlur = e => {
+  //     console.log('este es el evento blur  ', e);
     
-  };
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSearchText(() =>{
+      return {
+        ...searchText,
+        title: 'Search' ,
+      };
+    })
+    dispatch(reset());
+    dispatch(resetFilter());
+    dispatch(resetPagination());
     dispatch(getVideogameByName(formatUpperCase(searchText.name)));
   };
 
@@ -61,7 +71,7 @@ const Header = () => {
       </div>
       <div className="header__image" onClick={handleResetHomet}>
         <img src={videogame} alt="videogame" />
-        <p>Home</p>
+        <p>{searchText.title}</p>
       </div>
       <div className="header__formSearch">
         <form onSubmit={handleSubmit}>
@@ -70,12 +80,13 @@ const Header = () => {
           </label>
           <input
             value={searchText.name}
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
             onChange={handleChange}
             onClick={handleClickInput}
             type="text"
           />
           <button type="submit"> Search</button>
+          {searchText.title === 'Search' && <a href="/home"><span>←</span><p>Go Home</p></a>}
         </form>
       </div>
       <div className="header__perfil"></div>

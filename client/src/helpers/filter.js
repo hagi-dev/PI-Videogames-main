@@ -1,5 +1,6 @@
 export const filterDate = (data,createdOrExisted,genre,dataLength) => {
-    let dataSeparation = createdOrExisted === 'created' ? data.slice(dataLength) : createdOrExisted === 'existed' ? data.slice(0,dataLength) : data;
+    if(dataLength===0 && createdOrExisted==='created'){ return [{message: 'No hay resultados'}]}
+    let dataSeparation = createdOrExisted === 'created' ? data.slice(0,dataLength) : createdOrExisted === 'existed' ? data.slice(dataLength) : data;
     if(genre==='all' || genre===''){return dataSeparation}
     if(genre !== "all"){
         let dataFilter = dataSeparation && dataSeparation.filter((element)=>{
