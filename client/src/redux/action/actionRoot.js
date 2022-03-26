@@ -7,6 +7,7 @@ export const GET_ALL_GENRES = 'GET_ALL_GENRES';
 export const GET_VIDEOGAMER_FILTER_BY_NAME = 'GET_VIDEOGAMER_FILTER_BY_NAME';
 export const INITIAL_PAGINATE_DATA = 'INITIAL_PAGINATE_DATA';
 export const GET_FILTER = 'GET_FILTER';
+export const RESET = 'RESET';
 
 export const getAllVideoGames = () => {
     return (dispatch) => {
@@ -95,3 +96,8 @@ export const getAllGenres = ()=>{
 //     }
 // }
 
+export const reset = () => {
+    return {
+        type: RESET,
+    }
+}

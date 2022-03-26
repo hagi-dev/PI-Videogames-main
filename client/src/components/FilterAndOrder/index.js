@@ -96,6 +96,15 @@ const FilterAndOrder = props => {
         alphabetOrRating: stateSelectData.AlphabetOrRating,
       })
     );
+    dispatch(
+      getFilterData({
+        videoGames: videoGames.resData,
+        apiCount: videoGames.apiCount,
+        genre: stateSelectData.Genre,
+        createdOrExisted:
+          stateSelectData.CreatedOrExisted,
+      })
+    );
   }, [stateSelection.state]);
 
   return (

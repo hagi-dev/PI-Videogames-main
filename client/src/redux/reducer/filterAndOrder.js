@@ -7,6 +7,7 @@ import {
   GET_ORDER_DATA,
   GET_STATE_SELECTION,
   GET_FILTER,
+  RESET_FILTER
 } from "../action/actionFilterAndOrder";
 import { GET_VIDEOGAMER_FILTER_BY_NAME } from "../action/actionRoot";
 
@@ -106,6 +107,15 @@ const filter = (state = initialState, action) => {
           state: action.payload.state,
         },
       };
+    case RESET_FILTER:
+        return {
+            ...state,
+            stateSelection: {
+                name: "",
+                state: false,
+            },
+            filterData: [],
+        } 
     default:
       return state;
   }

@@ -25,6 +25,7 @@ const Videogames = () => {
     useEffect(() => {
         if( !filterData.length){
             dispatch(getAllVideoGames());
+            dispatch(getAllGenres());
         }
         
     }, [])

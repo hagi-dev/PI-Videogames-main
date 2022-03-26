@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   getVideogameByName,
-  getVideogameFilterByName,
+  getAllVideoGames,
+  reset,
 } from "../../redux/action/actionRoot";
+import { resetFilter } from "../../redux/action/actionFilterAndOrder";
+import { resetPagination } from "../../redux/action/actionPagination";
 import videogame from "../../assets/img/videogame.png";
 import {formatUpperCase} from '../../helpers/format/formatUpperCase';
 import "./style.scss";
@@ -19,6 +22,13 @@ const Header = () => {
      console.log('este es el evento click input  ', e); 
     e.isTrusted && setActive(true);
   };
+
+  const handleResetHomet = (e) => {
+    dispatch(reset());
+    dispatch(resetFilter());
+    dispatch(resetPagination());
+    dispatch(getAllVideoGames());
+  }
 
   const handleChange = e => {
     let changeText = e.target.value;
@@ -49,7 +59,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="header__image">
+      <div className="header__image" onClick={handleResetHomet}>
         <img src={videogame} alt="videogame" />
         <p>Home</p>
       </div>

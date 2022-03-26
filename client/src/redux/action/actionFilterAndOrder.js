@@ -8,6 +8,7 @@ export const GET_FILTER_DATA = 'GET_FILTER_DATA';
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
 export const GET_STATE_SELECTION = 'GET_STATE_SELECTION';
 export const GET_FILTER = 'GET_FILTER';
+export const RESET_FILTER = 'RESET_FILTER';
 
 export const getFilterCreatedOrExisted = (option) => {
     return {
@@ -73,5 +74,11 @@ export const getPaginationCurrent = (current) => {
     return {
         type: GET_FILTER,
         payload: current
+    }
+}
+
+export const resetFilter = () => {
+    return {
+        type: RESET_FILTER,
     }
 }
