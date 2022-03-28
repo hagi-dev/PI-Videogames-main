@@ -6,8 +6,9 @@ export const GET_VIDEOGAMER_BY_NAME = "GET_VIDEOGAMER_BY_NAME";
 export const GET_ALL_GENRES = "GET_ALL_GENRES";
 export const GET_VIDEOGAMER_FILTER_BY_NAME = "GET_VIDEOGAMER_FILTER_BY_NAME";
 export const INITIAL_PAGINATE_DATA = "INITIAL_PAGINATE_DATA";
-export const GET_FILTER = "GET_FILTER";
 export const RESET = "RESET";
+export const GET_HEADER_TEXT = "GET_HEADER_TEXT";
+export const GET_FILTER = "GET_FILTER";
 
 export const getAllVideoGames = () => {
   return dispatch => {
@@ -19,12 +20,12 @@ export const getAllVideoGames = () => {
           payload: response.data.resData,
         });
         dispatch({
-          type: GET_ALL_VIDEOGAMERS,
-          payload: response.data,
-        });
-        dispatch({
           type: GET_FILTER,
           payload: response.data.resData,
+        });
+        dispatch({
+          type: GET_ALL_VIDEOGAMERS,
+          payload: response.data,
         });
       })
       .catch(err => {
@@ -90,3 +91,10 @@ export const reset = () => {
     type: RESET,
   };
 };
+
+export const getTextHeader = (object) => {
+  return {
+    type: GET_HEADER_TEXT,
+    payload: object,
+  };
+}

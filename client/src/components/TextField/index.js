@@ -19,7 +19,7 @@ const TextField = props => {
   } = props;
   return (
     <div className="container_textField">
-      <label className={`label ${active && "active"}`}>{name}{require && '*'}</label>
+      <label className={`label ${active && "active"}`}>{name}{require && '(*)'}</label>
       {!textArea ? (
         <>
           <input

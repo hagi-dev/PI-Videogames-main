@@ -9,18 +9,17 @@ import Selection2 from "../../components/Selection2";
 import { validationField } from "../../helpers/validationField";
 import { platforms, platformsSelect } from "../../helpers/platformAndGenres";
 import { messageGuide } from "../../helpers/guideCreateVideogame";
-import {methodsPost} from '../../services/post';
+import { methodsPost } from "../../services/post";
 
 import "./style.scss";
 
 const CreateVideogame = () => {
-  const stateSelection = useSelector(
-    state => state.filterAndOrder.stateSelection
-  );
   const fieldValidation = validationField();
+  const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
   const dispatch = useDispatch();
   const genres = useSelector(state => state.rootReducer.genres);
   const options = genres.map(genre => genre.name);
+  const [stateButton, setStateButton] = React.useState("disabled");
   const dataSelections = {
     platform: platforms,
     genres: genres,
@@ -37,7 +36,7 @@ const CreateVideogame = () => {
     name: "",
     description: "",
     release_date: "",
-    genres: [],
+    genres: [{ id: 1000, name: ""}],
     platform: [],
     rating: "",
   });
@@ -63,7 +62,7 @@ const CreateVideogame = () => {
   const handleChange = e => {
     let { name, value } = e.target;
     let { state, message } = fieldValidation[name](value);
-    console.log(name, " ", value);
+    console.log("este es el valor cambiante", getData);
     setError(() => {
       return {
         ...error,
@@ -81,16 +80,15 @@ const CreateVideogame = () => {
       ...prevState,
       [name]: true,
     }));
-    let dataSelection = dataSelections[name].find(
-      element => element.name === value
-    );
+    let dataSelection = dataSelections[name].find(element => element.name === value);
     let exited = getData[name].find(element => element.id === dataSelection.id);
-    !exited && setGetData(item => {
-      return {
-        ...item,
-        [name]: [...item[name], { ...dataSelection }],
-      };
-    });
+    !exited &&
+      setGetData(item => {
+        return {
+          ...item,
+          [name]: [...item[name], { ...dataSelection }],
+        };
+      });
   };
   const handleClick = e => {
     setActiveLabel(() => {
@@ -110,20 +108,33 @@ const CreateVideogame = () => {
       };
     });
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let response = await methodsPost(getData);
     alert(response.data.message);
   };
 
   const handleClickBase = () => {
-    stateSelection.state &&
-      dispatch(getStateSelection({ state: false, name: "" }));
+    stateSelection.state && dispatch(getStateSelection({ state: false, name: "" }));
   };
 
   useEffect(() => {
     dispatch(getAllGenres());
   }, []);
+
+  useEffect(() => {
+    console.log('useEffec getdata',getData);
+    if (
+      !fieldValidation.name(getData.name).state &&
+      !fieldValidation.description(getData.description).state &&
+      getData.platform.length
+    ) {
+      setStateButton(()=>'');
+    }
+    else{
+      setStateButton('disabled');
+    }
+  },[getData]);
 
   return (
     <div className="createVideoGame" onClick={handleClickBase}>
@@ -144,9 +155,7 @@ const CreateVideogame = () => {
                 clickFunction={handleClick}
                 type={"text"}
               >
-                <p
-                  className={`messageInput ${error.name.state ? "error" : ""}`}
-                >
+                <p className={`messageInput ${error.name.state ? "error" : ""}`}>
                   {error.name.state ? error.name.message : messageGuide.name}
                 </p>
               </TextField>
@@ -156,16 +165,11 @@ const CreateVideogame = () => {
                 placeholder={""}
                 name={"release_date"}
                 value={getData.release_date}
-                blurFunction={handleBlur}
                 stateFunction={handleChange}
                 clickFunction={handleClick}
                 type={"date"}
               >
-                <p
-                  className={`messageInput ${
-                    error.release_date.state ? "error" : ""
-                  }`}
-                >
+                <p className={`messageInput ${error.release_date.state ? "error" : ""}`}>
                   {error.release_date.state
                     ? error.release_date.message
                     : messageGuide.release_date}
@@ -184,24 +188,16 @@ const CreateVideogame = () => {
                 clickFunction={handleClick}
                 type={"text"}
               >
-                <p
-                  className={`messageInput textArea ${
-                    error.description.state ? "error" : ""
-                  }`}
-                >
-                  {error.description.state
-                    ? error.description.message
-                    : messageGuide.description}
+                <p className={`messageInput textArea ${error.description.state ? "error" : ""}`}>
+                  {error.description.state ? error.description.message : messageGuide.description}
                 </p>
               </TextField>
               <div className="container_selection 1 ">
                 <h4
                   name={"genres"}
-                  className={`h4 ${
-                    activeLabel.genres ? "activate" : "deactivate"
-                  } `}
+                  className={`h4 ${activeLabel.genres ? "activate" : "deactivate"} `}
                 >
-                  Genres
+                  Genres {messageGuide.genre}
                 </h4>
                 <Selection2
                   width={"100%"}
@@ -220,26 +216,14 @@ const CreateVideogame = () => {
                         <div key={genre.id} style={{ margin: "2px 3px" }}>
                           <p>
                             {genre.name}
-                            <button
-                              onClick={() =>
-                                removeSelections(genre.id, "genres")
-                              }
-                            >
-                              X
-                            </button>
+                            <button onClick={() => removeSelections(genre.id, "genres")}>X</button>
                           </p>
                         </div>
                       );
                     })}
                   </div>
-                  <p
-                    className={`messageSelect ${
-                      error.genres.state ? "error" : ""
-                    }`}
-                  >
-                    {error.genres.state
-                      ? error.genres.message
-                      : messageGuide.genres}
+                  <p className={`messageSelect ${error.genres.state ? "error" : ""}`}>
+                    {error.genres.state ? error.genres.message : messageGuide.genres}
                   </p>
                 </Selection2>
               </div>
@@ -249,29 +233,20 @@ const CreateVideogame = () => {
                 active={activeLabel.rating}
                 name={"rating"}
                 value={getData.rating}
-                blurFunction={handleBlur}
                 stateFunction={handleChange}
                 clickFunction={handleClick}
                 type={"text"}
               >
-                <p
-                  className={`messageInput ${
-                    error.rating.state ? "error" : ""
-                  }`}
-                >
-                  {error.rating.state
-                    ? error.rating.message
-                    : messageGuide.rating}
+                <p className={`messageInput ${error.rating.state ? "error" : ""}`}>
+                  {error.rating.state ? error.rating.message : messageGuide.rating}
                 </p>
               </TextField>
               <div className="container_selection 2">
                 <h4
                   name={"genres"}
-                  className={`h4 ${
-                    activeLabel.platform ? "activate" : "deactivate"
-                  } `}
+                  className={`h4 ${activeLabel.platform ? "activate" : "deactivate"} `}
                 >
-                  Platform*
+                  Platform(*) {messageGuide.platform} 
                 </h4>
                 <Selection2
                   width={"100%"}
@@ -287,37 +262,28 @@ const CreateVideogame = () => {
                         <div key={e.id} style={{ margin: "2px 3px" }}>
                           <p>
                             {e.name}
-                            <button
-                              onClick={() => removeSelections(e.id, "platform")}
-                            >
-                              X
-                            </button>
+                            <button onClick={() => removeSelections(e.id, "platform")}>X</button>
                           </p>
                         </div>
                       );
                     })}
                   </div>
-                  <p
-                    className={`messageSelect ${
-                      error.platform.state ? "error" : ""
-                    }`}
-                  >
-                    {error.platform.state
-                      ? error.platform.message
-                      : messageGuide.platform}
-                  </p>
                 </Selection2>
               </div>
             </div>
           </div>
           <div className="createVideogame__form__button">
-            <button className="button v1" type="submit">
+            <button
+              disabled={stateButton}
+              className={`button v1 ${stateButton.length ? "disabled" : "enable"} `}
+              type="submit"
+            >
               <span className="content-button">Save</span>
             </button>
-            <button disable="true" className="button v2" type="button">
-              <Link to="/home" className="content-button">
+            <button className="button v2" type="button">
+              <a href="/home" className="content-button">
                 Cancel
-              </Link>
+              </a>
             </button>
           </div>
         </form>

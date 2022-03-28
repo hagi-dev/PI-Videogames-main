@@ -1,18 +1,18 @@
 //validsation fild with regular expressions
 export const validationField = () => {
   let _regex = {
-    _name: /^.{4,}/,
+    _name: /^.{1,}/,
     _description: /^^.{20,}/,
     _release_date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-    _rating: /^[0-9]{1,2}|[0-9]{1,2}\.[0-9]{1,2}$/,
+    _rating: /^([0-9])(\.[0-9]{1})?$/gm,
   };
   let _messageError = {
-    _name: "Name must be only letters",
-    _description: "Description must be only letters",
+    _name: "Must be at least 4 characters example: mario",
+    _description: "Description must contain a paragraph",
     _release_date: "Release date must be only format date",
     _platform: "should select a or match platform",
-    _genres: "should select a or match genre",
-    _rating: "Rating must be only numbers or decimal",
+    _genres: "should select zero or match genre",
+    _rating: "Rating must be number example: 1.5 or 4",
   };
 
   const validationInput = (nameVariable, value) => {

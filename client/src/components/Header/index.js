@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 
 import {
   getVideogameByName,
   getAllVideoGames,
+  getTextHeader,
   reset,
 } from "../../redux/action/actionRoot";
 import { resetFilter } from "../../redux/action/actionFilterAndOrder";
@@ -13,51 +14,28 @@ import {formatUpperCase} from '../../helpers/format/formatUpperCase';
 import "./style.scss";
 
 const Header = () => {
-  const [active, setActive] = useState(false);
+  const header = useSelector(state => state.rootReducer.header);
+  const dispatch = useDispatch();
+  const [active, setActive] = useState(!header.text.length ? false : true);
   const [searchText, setSearchText] = useState({
     name: "",
-    title:"Home"
   });
-  const dispatch = useDispatch();
   const handleClickInput = (e) => {
      console.log('este es el evento click input  ', e); 
     e.isTrusted && setActive(true);
   };
 
-  const handleResetHomet = (e) => {
-    dispatch(reset());
-    dispatch(resetFilter());
-    dispatch(resetPagination());
-    dispatch(getAllVideoGames());
-  }
-
   const handleChange = e => {
     let changeText = e.target.value;
-    setSearchText(() => {
-      return {
-        ...searchText,
-        name: changeText,
-      };
-    });
+    dispatch(getTextHeader({value:changeText, name: 'text'}));
   };
-
-  // const handleBlur = e => {
-  //     console.log('este es el evento blur  ', e);
-    
-  // };
-
   const handleSubmit = e => {
     e.preventDefault();
-    setSearchText(() =>{
-      return {
-        ...searchText,
-        title: 'Search' ,
-      };
-    })
+    dispatch(getTextHeader({value:'Search', name: 'title'}));
     dispatch(reset());
     dispatch(resetFilter());
     dispatch(resetPagination());
-    dispatch(getVideogameByName(formatUpperCase(searchText.name)));
+    dispatch(getVideogameByName(formatUpperCase(header.text)));
   };
 
   return (
@@ -69,9 +47,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="header__image" onClick={handleResetHomet}>
+      <div className="header__image">
         <img src={videogame} alt="videogame" />
-        <p>{searchText.title}</p>
+        <p>{header.title}</p>
       </div>
       <div className="header__formSearch">
         <form onSubmit={handleSubmit}>
@@ -79,14 +57,13 @@ const Header = () => {
             Search for name....
           </label>
           <input
-            value={searchText.name}
-            // onBlur={handleBlur}
+            value={header.text}
             onChange={handleChange}
             onClick={handleClickInput}
             type="text"
           />
           <button type="submit"> Search</button>
-          {searchText.title === 'Search' && <a href="/home"><span>←</span><p>Go Home</p></a>}
+          {header.title=== 'Search' && <a href="/home"><span>←</span><p>Go Home</p></a>}
         </form>
       </div>
       <div className="header__perfil"></div>

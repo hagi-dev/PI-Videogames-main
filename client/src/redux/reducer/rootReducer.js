@@ -5,6 +5,7 @@ import {
   GET_VIDEOGAMER,
   GET_VIDEOGAMER_BY_NAME,
   GET_ALL_GENRES,
+  GET_HEADER_TEXT,
   RESET,
 } from "../action/actionRoot";
 
@@ -12,6 +13,10 @@ const initialState = {
   videoGames: [],
   videoGame: {},
   genres: [],
+  header:{
+    text: '',
+    title: 'Home',
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,6 +41,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       };
+      case GET_HEADER_TEXT:
+      return {
+        ...state,
+        header: {
+          ...state.header,
+          [action.payload.name]: action.payload.value,
+        },
+      }
     case RESET:
       return {
         ...state,

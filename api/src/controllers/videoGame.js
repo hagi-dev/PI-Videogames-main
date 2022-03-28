@@ -51,40 +51,60 @@ exports.getById = async (req, res) => {
 //============================================================================
 
 exports.create = async (req, res) => {
-  const { name, description, release_date, rating, platform, genres } =
-    req.body;
-  console.log("este es el req.body : ", req.body);
+  const { name, description, release_date, rating, platform, genres } = req.body;
+  console.log("bpdy date ", release_date);
+  let genresData = genres.map(element => element.id);
   try {
-    const options = {
+    // console.log("entro aki ", release_date);
+    // !release_date===undefined ? validateDate(release_date) : '';
+    const validationGenres = await Genre.findAll({
       where: {
         id: {
-          [Op.eq]: conn.literal("(SELECT MAX(id) FROM videogames)"),
+          [Op.in]: genresData,
         },
       },
-    };
-    const lastIdData = await Videogame.findAll(options);
-    const lastId = lastIdData[0] ? lastIdData[0].toJSON().id : 0;
-    const newId = lastId ? lastId + 1 : 1000000;
-    await Videogame.create({
-      id: newId,
-      name: name,
-      description: description,
-      releaseDate: release_date,
-      rating: rating,
-      plataform: platform.map(element => {
-        return element.name;
-      }),
     });
-
-    genres.forEach(async item => {
-      await Videogame_Genres.create({
-        videogameId: newId,
-        genreId: item.id,
+    if (validationGenres.length === genresData.length) {
+      const options = {
+        where: {
+          id: {
+            [Op.eq]: conn.literal("(SELECT MAX(id) FROM videogames)"),
+          },
+        },
+      };
+      const lastIdData = await Videogame.findAll(options);
+      const lastId = lastIdData[0] ? lastIdData[0].toJSON().id : 0;
+      const newId = lastId ? lastId + 1 : 1000000;
+      await Videogame.create({
+        id: newId,
+        name: name,
+        description: description,
+        releaseDate: release_date === "" ? null : release_date,
+        rating: rating === "" ? null : rating,
+        platform: platform.map(element => {
+          return element.name;
+        }),
       });
-    });
-    res.json({ message: "VideoGame created" });
+
+      genresData.forEach(async item => {
+        await Videogame_Genres.create({
+          videogameId: newId,
+          genreId: item,
+        });
+      });
+      res.json({ message: "VideoGame created" });
+    } else {
+      res.json({ message: "videogame not created, the genre insert not valid" });
+    }
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    // console.log(error);
+    res.status(500).send({ message: error });
+  }
+};
+
+const validateDate = value => {
+  if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) && !(value === "")) {
+    console.log("entro aki al error ", value);
+    return res.send({ message: "Invalid date" });
   }
 };

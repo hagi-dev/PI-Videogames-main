@@ -4,6 +4,7 @@ import {
   GET_STATE_SELECTION,
   RESET_FILTER,
   GET_FILTER_AND_ORDER_TEXT,
+  GET_FILTER,
 } from "../action/actionFilterAndOrder";
 import { GET_VIDEOGAMER_FILTER_BY_NAME } from "../action/actionRoot";
 
@@ -40,7 +41,11 @@ const filter = (state = initialState, action) => {
         ...state,
         filterData: action.payload,
       };
-
+      case GET_FILTER:
+      return {
+        ...state,
+        filterData: action.payload,
+      } 
     case GET_FILTER_DATA:
       let dataFilter = filterDate(
         action.payload.videoGames,
@@ -80,6 +85,12 @@ const filter = (state = initialState, action) => {
           state: false,
         },
         filterData: [],
+        stateTextFilterAndOrder: {
+          createdOrExisted: "",
+          genre: "",
+          alphabetOrRating: "",
+          order: "",
+        },
       };
     default:
       return state;

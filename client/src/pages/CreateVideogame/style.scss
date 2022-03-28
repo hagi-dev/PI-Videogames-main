@@ -141,7 +141,7 @@
               font-size: 15px;
               position: absolute;
               color: #ffffff;
-              left: -240px;
+              left: -100px;
               right: 0;
               top: 6px;
               transition: all 0.2s ease-in-out;
@@ -150,7 +150,7 @@
             }
 
             .h4.activate {
-              transform: translate(0px, -20px);
+              transform: translate(-20px, -20px);
               font-size: 12px;
               color: rgb(160, 160, 165);
             }
@@ -208,6 +208,16 @@
             rgba(14, 57, 167, 1) 58%
           );
         }
+        .v1.disabled{
+          opacity: 0.5;
+        }
+
+        .v1.enabled{
+          opacity: 1;
+          &:active{
+            transform: scale(0.95);
+          }
+        }
 
         .v2 {
           background: none;
@@ -220,6 +230,9 @@
               rgba(49, 106, 254, 1) 0%,
               rgba(14, 57, 167, 1) 58%
             );
+          }
+          &:active{
+            transform: scale(0.95);
           }
         }
       }
