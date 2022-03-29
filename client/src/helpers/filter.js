@@ -10,7 +10,7 @@ export const filterDate = (data,createdOrExisted,genre,dataLength) => {
             }
         }
         })
-        dataFilter = !dataFilter.length ? [{message: 'No hay resultados'}] :  dataFilter;
+        dataFilter = !dataFilter.length ? [{message: 'Not Fount'}] :  dataFilter;
         return dataFilter;
     }
 }

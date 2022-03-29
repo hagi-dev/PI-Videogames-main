@@ -1,4 +1,9 @@
-.createVideoGame{
+@font-face {
+  font-family: "counter-strike";
+  src: local("MyFont"), url(../../assets/fonts/cs_regular.ttf) format("woff");
+}
+
+.createVideoGame {
   width: 100vw;
   height: 100vh;
   max-height: 850px;
@@ -10,7 +15,27 @@
   position: relative;
   z-index: -1;
 
-  .createVideoGame__image{
+  .createVideoGame__imageMario {
+    position: absolute;
+    bottom: 0%;
+    right: 8%;
+    z-index: 9;
+    width: 17%;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .createVideoGame__imageLuigi {
+    position: absolute;
+    bottom: 2%;
+    left: 9%;
+    z-index: 9;
+    width: 15%;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .createVideoGame__image {
     position: absolute;
   }
 
@@ -44,8 +69,10 @@
       width: 100%;
       height: 80px;
       h1 {
+        font-family: "counter-strike";
         text-align: center;
-        font-weight: bold;
+        font-size: 2.5rem;
+        font-weight: 400;
         color: #fff;
       }
     }
@@ -57,7 +84,7 @@
 
       .rows {
         padding: 0 13%;
-        height:400px;
+        height: 400px;
         .createVideogame__form__row {
           width: 90%;
           display: flex;
@@ -90,7 +117,6 @@
           .messageSelect.error {
             color: red;
           }
-
 
           .container_select-selection {
             width: 100%;
@@ -155,7 +181,7 @@
               color: rgb(160, 160, 165);
             }
           }
-          .messageInput.textArea{
+          .messageInput.textArea {
             top: 115px;
             left: -10px;
           }
@@ -202,19 +228,15 @@
         .v1 {
           border: 0;
           background: rgb(49, 106, 254);
-          background: linear-gradient(
-            90deg,
-            rgba(49, 106, 254, 1) 0%,
-            rgba(14, 57, 167, 1) 58%
-          );
+          background: linear-gradient(90deg, rgba(49, 106, 254, 1) 0%, rgba(14, 57, 167, 1) 58%);
         }
-        .v1.disabled{
+        .v1.disabled {
           opacity: 0.5;
         }
 
-        .v1.enabled{
+        .v1.enabled {
           opacity: 1;
-          &:active{
+          &:active {
             transform: scale(0.95);
           }
         }
@@ -225,13 +247,9 @@
           &:hover {
             border: 0;
             background: rgb(49, 106, 254);
-            background: linear-gradient(
-              90deg,
-              rgba(49, 106, 254, 1) 0%,
-              rgba(14, 57, 167, 1) 58%
-            );
+            background: linear-gradient(90deg, rgba(49, 106, 254, 1) 0%, rgba(14, 57, 167, 1) 58%);
           }
-          &:active{
+          &:active {
             transform: scale(0.95);
           }
         }

@@ -10,6 +10,8 @@ import { validationField } from "../../helpers/validationField";
 import { platforms, platformsSelect } from "../../helpers/platformAndGenres";
 import { messageGuide } from "../../helpers/guideCreateVideogame";
 import { methodsPost } from "../../services/post";
+import mario from "../../assets/img/SuperMarioBros.png";
+import luigi from "../../assets/img/Luigi.png";
 
 import "./style.scss";
 
@@ -86,12 +88,12 @@ const CreateVideogame = () => {
     }));
     let dataSelection = dataSelections[name].find(element => element.name === value);
     let exited = getData[name].find(element => element.id === dataSelection.id);
-    setStateTextSelection((prevState)=>{
+    setStateTextSelection(prevState => {
       return {
         ...prevState,
-        [name]: value
-      }
-    });  
+        [name]: value,
+      };
+    });
     !exited &&
       setGetData(item => {
         return {
@@ -123,13 +125,10 @@ const CreateVideogame = () => {
     let response = fieldValidation.submitValidateGame(error);
     if (response.state) {
       alert(response.message);
-    }else{
+    } else {
       let response = await methodsPost(getData);
       alert(response.data.message);
     }
-
-    
-
   };
 
   const handleClickBase = () => {
@@ -141,28 +140,30 @@ const CreateVideogame = () => {
   }, []);
 
   useEffect(() => {
-    console.log('useEffec getdata',getData);
+    console.log("useEffec getdata", getData);
     if (
       !fieldValidation.name(getData.name).state &&
       !fieldValidation.description(getData.description).state &&
       getData.platform.length
     ) {
-      setStateButton(()=>'');
+      setStateButton(() => "");
+    } else {
+      setStateButton("disabled");
     }
-    else{
-      setStateButton('disabled');
-    }
-  },[getData]);
+  }, [getData]);
 
   return (
-    <div className="createVideoGame" onClick={handleClickBase}>
-      <div className="createVideoGame__container">
-        <div className="createVideogame__title">
+    <div className='createVideoGame' onClick={handleClickBase}>
+      <img className='createVideoGame__imageMario' src={mario} />
+
+      <img className='createVideoGame__imageLuigi' src={luigi} />
+      <div className='createVideoGame__container'>
+        <div className='createVideogame__title'>
           <h1>Create Videogame</h1>
         </div>
-        <form onSubmit={handleSubmit} className="createVideogame__form">
-          <div className="rows">
-            <div className="createVideogame__form__row 1">
+        <form onSubmit={handleSubmit} className='createVideogame__form'>
+          <div className='rows'>
+            <div className='createVideogame__form__row 1'>
               <TextField
                 active={activeLabel.name}
                 name={"name"}
@@ -194,7 +195,7 @@ const CreateVideogame = () => {
                 </p>
               </TextField>
             </div>
-            <div className="createVideogame__form__row 2">
+            <div className='createVideogame__form__row 2'>
               <TextField
                 active={activeLabel.description}
                 name={"description"}
@@ -210,7 +211,7 @@ const CreateVideogame = () => {
                   {error.description.state ? error.description.message : messageGuide.description}
                 </p>
               </TextField>
-              <div className="container_selection 1 ">
+              <div className='container_selection 1 '>
                 <h4
                   name={"genres"}
                   className={`h4 ${activeLabel.genres ? "activate" : "deactivate"} `}
@@ -227,7 +228,7 @@ const CreateVideogame = () => {
                   options={options}
                 >
                   <div
-                    className="container_select-selection"
+                    className='container_select-selection'
                     style={{ display: "flex", flexWrap: "wrap" }}
                   >
                     {getData.genres.map(genre => {
@@ -247,7 +248,7 @@ const CreateVideogame = () => {
                 </Selection2>
               </div>
             </div>
-            <div className="createVideogame__form__row 3">
+            <div className='createVideogame__form__row 3'>
               <TextField
                 active={activeLabel.rating}
                 name={"rating"}
@@ -260,12 +261,12 @@ const CreateVideogame = () => {
                   {error.rating.state ? error.rating.message : messageGuide.rating}
                 </p>
               </TextField>
-              <div className="container_selection 2">
+              <div className='container_selection 2'>
                 <h4
                   name={"genres"}
                   className={`h4 ${activeLabel.platform ? "activate" : "deactivate"} `}
                 >
-                  Platform(*) {messageGuide.platform} 
+                  Platform(*) {messageGuide.platform}
                 </h4>
                 <Selection2
                   width={"100%"}
@@ -276,7 +277,7 @@ const CreateVideogame = () => {
                   onchange={handleChangeSelect}
                   options={platformsSelect}
                 >
-                  <div className="container_select-selection">
+                  <div className='container_select-selection'>
                     {getData.platform.map(e => {
                       return (
                         <div key={e.id} style={{ margin: "2px 3px" }}>
@@ -292,16 +293,16 @@ const CreateVideogame = () => {
               </div>
             </div>
           </div>
-          <div className="createVideogame__form__button">
+          <div className='createVideogame__form__button'>
             <button
               disabled={stateButton}
               className={`button v1 ${stateButton.length ? "disabled" : "enable"} `}
-              type="submit"
+              type='submit'
             >
-              <span className="content-button">Save</span>
+              <span className='content-button'>Save</span>
             </button>
-            <button className="button v2" type="button">
-              <a href="/home" className="content-button">
+            <button className='button v2' type='button'>
+              <a href='/home' className='content-button'>
                 Cancel
               </a>
             </button>
