@@ -28,7 +28,6 @@ const initialState = {
 const filter = (state = initialState, action) => {
   switch (action.type) {
     case GET_FILTER_AND_ORDER_TEXT:
-      console.log("GET_FILTER_AND_ORDER_TEXT", action.payload);
       return {
         ...state,
         stateTextFilterAndOrder: {
@@ -86,6 +85,7 @@ const filter = (state = initialState, action) => {
         },
         filterData: [],
         stateTextFilterAndOrder: {
+          ...state.stateTextFilterAndOrder,
           createdOrExisted: "",
           genre: "",
           alphabetOrRating: "",

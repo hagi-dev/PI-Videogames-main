@@ -20,6 +20,10 @@ const CreateVideogame = () => {
   const genres = useSelector(state => state.rootReducer.genres);
   const options = genres.map(genre => genre.name);
   const [stateButton, setStateButton] = React.useState("disabled");
+  const [stateTextSelection, setStateTextSelection] = React.useState({
+    genres: "",
+    platform: "",
+  });
   const dataSelections = {
     platform: platforms,
     genres: genres,
@@ -36,7 +40,7 @@ const CreateVideogame = () => {
     name: "",
     description: "",
     release_date: "",
-    genres: [{ id: 1000, name: ""}],
+    genres: [],
     platform: [],
     rating: "",
   });
@@ -82,6 +86,12 @@ const CreateVideogame = () => {
     }));
     let dataSelection = dataSelections[name].find(element => element.name === value);
     let exited = getData[name].find(element => element.id === dataSelection.id);
+    setStateTextSelection((prevState)=>{
+      return {
+        ...prevState,
+        [name]: value
+      }
+    });  
     !exited &&
       setGetData(item => {
         return {
@@ -110,8 +120,17 @@ const CreateVideogame = () => {
   };
   const handleSubmit = async e => {
     e.preventDefault();
-    let response = await methodsPost(getData);
-    alert(response.data.message);
+    let response = fieldValidation.submitValidateGame(error);
+    if (response.state) {
+      alert(response.message);
+    }else{
+      alert('paso y se registro')
+    }
+
+    
+
+    // let response = await methodsPost(getData);
+    // alert(response.data.message);
   };
 
   const handleClickBase = () => {
@@ -203,6 +222,7 @@ const CreateVideogame = () => {
                   width={"100%"}
                   name={"genres"}
                   version={"v1"}
+                  value={stateTextSelection.genres}
                   blurFunction={handleBlur}
                   onchange={handleChangeSelect}
                   options={options}
@@ -252,6 +272,7 @@ const CreateVideogame = () => {
                   width={"100%"}
                   name={"platform"}
                   version={"v1"}
+                  value={stateTextSelection.platform}
                   blurFunction={handleBlur}
                   onchange={handleChangeSelect}
                   options={platformsSelect}

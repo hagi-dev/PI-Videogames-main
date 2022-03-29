@@ -13,7 +13,6 @@ const initialState = {
 const paginate = (state = initialState, action) => {
   switch (action.type) {
     case INITIAL_PAGINATE_DATA:
-        console.log(action.payload);
       let dataInitial = action.payload && action.payload.slice(0, 15);
       return {
         ...state,

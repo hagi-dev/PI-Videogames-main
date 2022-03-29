@@ -20,9 +20,9 @@ const Selection2 = props => {
     let replaces = e.target.innerText.trim().replace(/\-/g, "");
     onchange(name, replaces);
     dispatch(getStateSelection({ state: !stateSelection.state, name: name }));
-    setTimeout(() => {
-      setTextSelection(replaces);
-    }, 200);
+    // setTimeout(() => {
+    //   dispatch();
+    // }, 200);
   };
   return (
     <>
@@ -42,7 +42,7 @@ const Selection2 = props => {
           } ${version}`}
           onClick={handleClick}
         >
-          <h2>{textSelection}</h2>
+          <h2>{value}</h2>
         </div>
         <div
           className={`select__options ${

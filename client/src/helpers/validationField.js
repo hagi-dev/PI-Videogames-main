@@ -65,6 +65,31 @@ export const validationField = () => {
   const genres = value => {
     return validationSelect("_genres", value);
   };
+  const submitValidateGame = ({ name, description, release_date, rating, platform, genres }) => {
+    let _response = {
+      state: false,
+      message: "",
+    };
+    if (
+      name.state ||
+      description.state ||
+      release_date.state ||
+      rating.state ||
+      platform.state ||
+      genres.state
+    ) {
+      _response = {
+        state: true,
+        message: "have field with error ",
+      };
+    } else {
+      _response = {
+        state: false,
+        message: "",
+      };
+    }
+    return _response;
+  };
 
   return {
     name,
@@ -72,6 +97,7 @@ export const validationField = () => {
     release_date,
     rating,
     platform,
-    genres
+    genres,
+    submitValidateGame,
   };
 };

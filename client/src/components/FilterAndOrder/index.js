@@ -6,6 +6,7 @@ import {
   getFilterData,
   getOrderData,
   getFilterAndOrderText,
+  resetFilter,
 } from "../../redux/action/actionFilterAndOrder";
 import { getPaginationCurrent, getPageCurrent } from "../../redux/action/actionPagination";
 import { paginationData } from "../../helpers/pagination";
@@ -13,6 +14,7 @@ import "./style.scss";
 
 const FilterAndOrder = props => {
   const dispatch = useDispatch();
+  const header = useSelector(state => state.rootReducer.header);
   const stateSelection = useSelector(state => state.filterAndOrder.stateSelection);
   const stateTextFilterAndOrder = useSelector(
     state => state.filterAndOrder.stateTextFilterAndOrder
@@ -20,30 +22,14 @@ const FilterAndOrder = props => {
   const { videoGames } = props;
   const genresData = useSelector(state => state.rootReducer.genres);
   const filterData = useSelector(state => state.filterAndOrder.filterData);
-  const [stateActivatedLabel, setStateActivatedLabel] = useState({
-    genre: stateTextFilterAndOrder.genre.length ? true : false,
-    createdOrExisted: stateTextFilterAndOrder.createdOrExisted.length ? true : false,
-    alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating.length ? true : false,
-    order: stateTextFilterAndOrder.order.length ? true : false,
-  });
   const abstractDataGenre = genresData.map(genre => genre.name);
   const genres = ["all", ...abstractDataGenre];
   const createdOrExisted = ["all", "existed", "created"];
   const alphabetOrRating = ["alphabet", "rating"];
   const ascOrDesc = ["asc", "desc"];
 
-  const changeStateLabel = name => {
-    setStateActivatedLabel(prevState => {
-      return {
-        ...prevState,
-        [name]: true,
-      };
-    });
-  };
-
   const onChangeFilter = (name, value) => {
     dispatch(getFilterAndOrderText({ name, value }));
-    changeStateLabel(name);
     dispatch(
       getFilterData({
         videoGames: videoGames.resData,
@@ -57,7 +43,6 @@ const FilterAndOrder = props => {
 
   const onChangeOrder = (name, value) => {
     dispatch(getFilterAndOrderText({ name, value }));
-    changeStateLabel(name);
     dispatch(
       getOrderData({
         videoGames: filterData,
@@ -65,7 +50,7 @@ const FilterAndOrder = props => {
         alphabetOrRating:
           name === "alphabetOrRating" ? value : stateTextFilterAndOrder.alphabetOrRating,
       })
-    )
+    );
     dispatch(getPaginationCurrent(paginationData(filterData, 15, 1)));
     dispatch(getPageCurrent(1));
   };
@@ -77,7 +62,7 @@ const FilterAndOrder = props => {
         order: stateTextFilterAndOrder.order,
         alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating,
       })
-    )
+    );
     dispatch(
       getOrderData({
         videoGames: filterData,
@@ -85,16 +70,17 @@ const FilterAndOrder = props => {
         alphabetOrRating: stateTextFilterAndOrder.alphabetOrRating,
       })
     );
-  },[stateSelection.state]);
+  }, [stateSelection.state]);
 
   return (
     <div className="filterAndOrder">
       <div className="filterAndOrder__containerFilter">
         <h5>Filter:</h5>
         <div className="filterAndOrder__filterGenre">
-          <h4 className={`h4 ${stateActivatedLabel["genre"] ? "activate" : "deactivate"} `}>
+          <h4 className={`h4 ${stateTextFilterAndOrder["genre"].length ? "activate" : "deactivate"} `}>
             Genre
           </h4>
+          {console.log("RESET_FILTER stateTextFilterAndOrder render", stateTextFilterAndOrder)}
           <Selection
             onchange={onChangeFilter}
             options={genres}
@@ -104,7 +90,7 @@ const FilterAndOrder = props => {
           />
         </div>
         <div className="filterAndOrder__filterCreatedOrExisted">
-          <h4 className={`h4 ${stateActivatedLabel.createdOrExisted ? "activate" : "deactivate"} `}>
+          <h4 className={`h4 ${stateTextFilterAndOrder.createdOrExisted.length ? "activate" : "deactivate"} `}>
             Created Or Existed
           </h4>
           <Selection
@@ -120,7 +106,7 @@ const FilterAndOrder = props => {
         <h5>Order:</h5>
         <div className="filterAndOrder__OrderAlphabetOrRating">
           <h4
-            className={`h4 ${stateActivatedLabel["alphabetOrRating"] ? "activate" : "deactivate"} `}
+            className={`h4 ${stateTextFilterAndOrder["alphabetOrRating"].length ? "activate" : "deactivate"} `}
           >
             Alphabet or Rating
           </h4>
@@ -133,7 +119,7 @@ const FilterAndOrder = props => {
           />
         </div>
         <div className="filterAndOrder__OrderAscOrDesc">
-          <h4 className={`h4 ${stateActivatedLabel["order"] ? "activate" : "deactivate"} `}>
+          <h4 className={`h4 ${stateTextFilterAndOrder["order"].length ? "activate" : "deactivate"} `}>
             Asc or Desc
           </h4>
           <Selection
