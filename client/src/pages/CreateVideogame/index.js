@@ -124,13 +124,12 @@ const CreateVideogame = () => {
     if (response.state) {
       alert(response.message);
     }else{
-      alert('paso y se registro')
+      let response = await methodsPost(getData);
+      alert(response.data.message);
     }
 
     
 
-    // let response = await methodsPost(getData);
-    // alert(response.data.message);
   };
 
   const handleClickBase = () => {
