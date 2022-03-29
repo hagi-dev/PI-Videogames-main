@@ -4,11 +4,10 @@ import { getAllVideoGames,getAllGenres } from '../../redux/action/actionRoot';
 
 import Header from '../../components/Header/index';
 import ButtonCreate from '../../components/ButtonCreate/index';
-import Background from '../../assets/img/background.png';
 import VideogameList from '../../components/VideogameList/index';
 import FilterAndOrder from '../../components/FilterAndOrder/index';
-import { InitialPaginationData } from '../../redux/action/actionPagination';
-import { getStateSelection, initialFilterData } from '../../redux/action/actionFilterAndOrder';
+import { resetVideogame } from '../../redux/action/actionRoot';
+import { getStateSelection } from '../../redux/action/actionFilterAndOrder';
 import './style.scss';
 
 const Videogames = () => {
@@ -24,6 +23,7 @@ const Videogames = () => {
 
     useEffect(() => {
         if( !filterData.length){
+            dispatch(resetVideogame());
             dispatch(getAllVideoGames());
             dispatch(getAllGenres());
         }

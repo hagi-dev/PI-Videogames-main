@@ -98,3 +98,6 @@ const filter = (state = initialState, action) => {
 };
 
 export default filter;
+
+//function filter
+// function filterDate(videoGames, createdOrExisted, genre, dbCount) {}

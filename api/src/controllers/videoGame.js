@@ -55,8 +55,6 @@ exports.create = async (req, res) => {
   console.log("bpdy date ", release_date);
   let genresData = genres.map(element => element.id);
   try {
-    // console.log("entro aki ", release_date);
-    // !release_date===undefined ? validateDate(release_date) : '';
     const validationGenres = await Genre.findAll({
       where: {
         id: {

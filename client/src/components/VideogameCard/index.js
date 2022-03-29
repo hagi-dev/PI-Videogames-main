@@ -7,6 +7,7 @@ import './style.scss';
 const VideoGameCard = props => {
     let imgDefaul = 'https://holatelcel.com/wp-content/uploads/2020/08/mario-bross-google-game--1280x720.png';
     const { videoGame } = props;
+    
     return (
         <Link to={'/videogames/'+videoGame.id} className='videoGameCard'>
             <div className='videoGameCard__image'>

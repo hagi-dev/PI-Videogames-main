@@ -1,13 +1,15 @@
 .videogame{
     width: 100vw;
-    height: 100vh;
+    height:100vh;
     position: relative;
     color :#ffffff;
     display: flex;
+    overflow: hidden;
     align-items: flex-end;
     padding: 0 3.5%;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(49,106,254,0) 80%);
+    // transition: all 1s ease-in-out;
     
     .videogame__backHome{
         a{
@@ -259,4 +261,12 @@
             }
         }
     }
+}
+
+.loader{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

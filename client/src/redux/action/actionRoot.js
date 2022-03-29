@@ -9,6 +9,7 @@ export const INITIAL_PAGINATE_DATA = "INITIAL_PAGINATE_DATA";
 export const RESET = "RESET";
 export const GET_HEADER_TEXT = "GET_HEADER_TEXT";
 export const GET_FILTER = "GET_FILTER";
+export const RESET_VIDEOGAME = "RESET_VIDEOGAME";
 
 export const getAllVideoGames = () => {
   return dispatch => {
@@ -96,5 +97,11 @@ export const getTextHeader = (object) => {
   return {
     type: GET_HEADER_TEXT,
     payload: object,
+  };
+}
+
+export const resetVideogame = () => {
+  return {
+    type: RESET_VIDEOGAME,
   };
 }
