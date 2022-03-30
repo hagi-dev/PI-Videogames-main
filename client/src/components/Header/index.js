@@ -3,7 +3,6 @@ import { useDispatch, useSelector} from "react-redux";
 
 import {
   getVideogameByName,
-  getAllVideoGames,
   getTextHeader,
   reset,
 } from "../../redux/action/actionRoot";
@@ -17,9 +16,6 @@ const Header = () => {
   const header = useSelector(state => state.rootReducer.header);
   const dispatch = useDispatch();
   const [active, setActive] = useState(!header.text.length ? false : true);
-  const [searchText, setSearchText] = useState({
-    name: "",
-  });
   const handleClickInput = (e) => {
      console.log('este es el evento click input  ', e); 
     e.isTrusted && setActive(true);
@@ -68,7 +64,7 @@ const Header = () => {
       </div>
       <div className="header__perfil"></div>
       <div className="header__autorCreated">
-        <p>Created by Hagi-dev*</p>
+        <h6>Created by Hagi-dev*</h6>
       </div>
     </div>
   );

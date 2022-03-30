@@ -206,7 +206,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 200px;
+    height: 50px;
+    position: absolute;
+    bottom: 1%;
+    left: 0;
+    right: 0;
 
     p {
       font-size: 13px;
