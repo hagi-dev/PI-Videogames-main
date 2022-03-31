@@ -14,7 +14,12 @@ module.exports = sequelize => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
-          msg: "the name already exists",
+          msg: "the videogame already exists",
+        },
+        validate: {
+          notEmpty: {
+            msg: "the name is required",
+          },
         },
       },
       description: {

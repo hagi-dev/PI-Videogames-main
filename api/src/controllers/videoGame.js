@@ -7,7 +7,7 @@ process.env;
 
 exports.getById = async (req, res) => {
   try {
-    let { idVideoGame } = req.params;
+    let {idVideoGame} = req.params;
     let result = await Videogame.findAll({
       where: {
         id: idVideoGame,
@@ -96,13 +96,7 @@ exports.create = async (req, res) => {
     }
   } catch (error) {
     // console.log(error);
-    res.status(500).send({ message: error });
+    res.status(500).send({ message: error.errors[0].message});
   }
 };
 
-const validateDate = value => {
-  if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) && !(value === "")) {
-    console.log("entro aki al error ", value);
-    return res.send({ message: "Invalid date" });
-  }
-};

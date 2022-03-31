@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js --timeout 5000"
   },
   "author": "Henry",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
     "supertest": "^6.0.1",
+    "supertest-as-promised": "^4.0.2",
     "supertest-session": "^4.1.0"
   }
 }

@@ -5,6 +5,7 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
 import Header from "../components/Header/index";
+import * as actions from "../redux/action/actionRoot";
 
 configure({ adapter: new Adapter() });
 
@@ -16,7 +17,7 @@ describe("HeaderTest", () => {
     let state = {
       header: {
         title: "Home",
-        text: "",
+        text: "pok",
       },
     };
     return mockStore(state);
@@ -28,7 +29,7 @@ describe("HeaderTest", () => {
     Header2 = () =>
       mount(
         <ReactRedux.Provider store={store()}>
-            <Header  />
+          <Header />
         </ReactRedux.Provider>
       );
   });
@@ -43,6 +44,7 @@ describe("HeaderTest", () => {
     expect(Header2().find("p").text()).toEqual("Home");
     expect(Header2().find("img").length).toEqual(1);
   });
+
   it("should render form with input, label and button submit", () => {
     useSelectorFn();
     expect(Header2().find("form").length).toEqual(1);
@@ -51,5 +53,16 @@ describe("HeaderTest", () => {
     expect(Header2().find("label").length).toEqual(1);
     expect(Header2().find("button").length).toEqual(1);
     expect(Header2().find("button").props().type).toEqual("submit");
+  });
+
+  it("should dispatch actions getVideogameByName in handleSubmit", () => {
+    useSelectorFn();
+    const useDispatch = jest.spyOn(ReactRedux, "useDispatch");
+    const getVideogameByName = jest.spyOn(actions, "getVideogameByName");
+    const form = Header2().find('form').first();
+    form.simulate('submit');
+    Header2();
+    expect(useDispatch).toHaveBeenCalled();
+    expect(getVideogameByName).toHaveBeenCalled();
   });
 });
