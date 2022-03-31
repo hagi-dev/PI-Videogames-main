@@ -28,7 +28,7 @@ const Header = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if(header.text !== ''){
-      dispatch(getVideogameByName(formatUpperCase(header.text)));
+    dispatch(getVideogameByName(formatUpperCase(header.text)));
     dispatch(getTextHeader({value:'Search', name: 'title'}));
     dispatch(reset());
     dispatch(resetFilter());

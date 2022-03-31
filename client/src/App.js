@@ -1,4 +1,4 @@
-import { Routes , Route} from 'react-router-dom';
+import { Routes , Route, Navigate} from 'react-router-dom';
 
 import './App.css';
 import './helpers/format/normalize.css';
@@ -7,6 +7,7 @@ import Background from './assets/img/background.png';
 import Videogame from './pages/Videogame';
 import CreateVideogame from './pages/CreateVideogame';
 import LandingPage from './pages/LandingPage/index';
+import NotFount from './components/NotFount/NotFont';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
         <Route exact path="/home" element={<Videogames/>} />
         <Route exact path="/videogames/:id" element={<Videogame/>} />
         <Route exact path="/videogame/create" element={<CreateVideogame/>} />
+        <Route path="*" element={<NotFount/>} />
+        
       </Routes>
     </div>
   );

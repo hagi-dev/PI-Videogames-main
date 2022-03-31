@@ -10,6 +10,7 @@ import {
 } from "../../redux/action/actionFilterAndOrder";
 import { getPaginationCurrent, getPageCurrent } from "../../redux/action/actionPagination";
 import { paginationData } from "../../helpers/pagination";
+import platformAndGenres from "../../helpers/platformAndGenres";
 import "./style.scss";
 
 const FilterAndOrder = props => {
@@ -25,8 +26,9 @@ const FilterAndOrder = props => {
   const abstractDataGenre = genresData.map(genre => genre.name);
   const genres = ["all", ...abstractDataGenre];
   const createdOrExisted = ["all", "existed", "created"];
-  const alphabetOrRating = ["alphabet", "rating"];
+  const alphabetOrRating = ["alphabet", "rating","rating count"];
   const ascOrDesc = ["asc", "desc"];
+  // const platform = platformAndGenres;
 
   const onChangeFilter = (name, value) => {
     dispatch(getFilterAndOrderText({ name, value }));

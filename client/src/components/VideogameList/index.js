@@ -35,10 +35,11 @@ const VideogameList = () => {
 
   return (
     <div className='videogameList'>
-      {paginationData2.length === 0 &&
+      {paginationData2.length ===0 && !videoGames.message ? 
         numCardLoader.map((element, index) => {
           return <LoaderCard key={index} />;
-        })}
+        }):
+        null}
       {videoGames.message && (
         <p
           style={{

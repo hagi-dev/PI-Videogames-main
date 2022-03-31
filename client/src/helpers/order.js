@@ -6,6 +6,9 @@ const orderData = (data,alphabetOrRating,order) => {
     if(!order){return data};
     if(alphabetOrRating === 'alphabet'){orderData = orderAlphabet(data,order)}
     else if(alphabetOrRating === 'rating'){orderData = orderRating(data,order)}
+    else if(alphabetOrRating === 'rating count'){
+        orderData = orderRatingCount(data,order)
+    }
     return orderData;
 }
 
@@ -61,6 +64,25 @@ const orderRating = (data,order) =>{
         orderData = data.sort(
             (a,b)=>{
                 return b.rating-a.rating;
+            }
+        )
+    }
+    return orderData;
+}
+
+const orderRatingCount = (data,order) =>{
+    let orderData = []; 
+    if(order && order === 'asc'){
+        orderData = data.sort(
+            (a,b)=>{
+                return a.ratings_count-b.ratings_count;
+            }
+        )
+    }
+    else if(order && order === 'desc'){
+        orderData = data.sort(
+            (a,b)=>{
+                return b.ratings_count-a.ratings_count;
             }
         )
     }

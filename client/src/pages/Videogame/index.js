@@ -15,7 +15,6 @@ const Videogame = () => {
   const { id } = useParams();
   const videoGame = useSelector(state => state.rootReducer.videoGame);
   let released = new Date(videoGame.releaseDate).toDateString();
-  const [isLoading, setIsLoading] = useState(true);
   const [seeDescription, setSeeDescription] = useState({
     see: false,
     orientationName: "ver mas...",
@@ -31,13 +30,19 @@ const Videogame = () => {
   };
 
   useEffect(() => {
-    dispatch(resetVideogame());
-    dispatch(getVideogameById(id));
+    if (/^\d+$/.test(id)) {
+      dispatch(resetVideogame());
+      dispatch(getVideogameById(id));
+    }else{
+      alert("id not valid");
+      alert("redirect to home");
+      window.location.href = "/";
+    }
   }, []);
   return videoGame.name ? (
-    <div className={`videogame  ${videoGame.name ? 'active':''}`}>
-      <div className="videogame__backHome">
-        <Link to="/home">
+    <div className={`videogame  ${videoGame.name ? "active" : ""}`}>
+      <div className='videogame__backHome'>
+        <Link to='/home'>
           <p>←</p>
           <span>Back Home</span>
         </Link>
@@ -47,17 +52,17 @@ const Videogame = () => {
           <img src={videoGame.image ? videoGame.image : imgDefaul} alt={videoGame.name} />
         </div>
       )}
-      <div className="videogame__descriptionPart1">
-        <div className="videogame__descriptionPart1_title">
+      <div className='videogame__descriptionPart1'>
+        <div className='videogame__descriptionPart1_title'>
           <p>{videoGame.name}</p>
         </div>
-        <div className="videogame__descriptionPart1_released">
+        <div className='videogame__descriptionPart1_released'>
           <h3>Released : {released}</h3>
         </div>
-        <div className="videogame__descriptionPart1_rating">
+        <div className='videogame__descriptionPart1_rating'>
           <h3>Rating : {videoGame.rating} point</h3>
         </div>
-        <div className="videogame__descriptionPart1_genres">
+        <div className='videogame__descriptionPart1_genres'>
           <h3>Genres</h3>
           <ul className={`videogame__descriptionPart1_genre-list ${videoGame.name && "active"}`}>
             {videoGame.genres &&
@@ -67,21 +72,21 @@ const Videogame = () => {
           </ul>
         </div>
       </div>
-      <div className="videogame__descriptionPart2">
+      <div className='videogame__descriptionPart2'>
         <div className={`videogame__descriptionPart2_description ${seeDescription.see && "see"}`}>
           <h3>Description :</h3>
-          <div className="videogame__descriptionPart2_decription-paragraph">
+          <div className='videogame__descriptionPart2_decription-paragraph'>
             <div>
               <p>{videoGame.description}</p>
             </div>
-            <button onClick={handleSeeDescription} type="button">
+            <button onClick={handleSeeDescription} type='button'>
               {seeDescription.orientationName}
             </button>
           </div>
         </div>
-        <div className="videogame__descriptionPart2_plataform">
+        <div className='videogame__descriptionPart2_plataform'>
           <h3>Available Plataforms</h3>
-          <div className="videogame__descriptionPart2_plataform-icons">
+          <div className='videogame__descriptionPart2_plataform-icons'>
             {videoGame.plataform &&
               videoGame.plataform.map((element, index) => {
                 return <IconPlataform key={index} plataform={element} />;
@@ -91,7 +96,7 @@ const Videogame = () => {
       </div>
     </div>
   ) : (
-    <div className="loader">
+    <div className='loader'>
       <Loader />
     </div>
   );

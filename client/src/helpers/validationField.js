@@ -1,10 +1,10 @@
 //validsation fild with regular expressions
 export const validationField = () => {
   let _regex = {
-    _name: /^.{1,}/,
+    _name: /^([a-zA-Z]|\S){1,}/,
     _description: /^^.{20,}/,
     _release_date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-    _rating: /^([0-9])(\.[0-9]{1})?$/gm,
+    _rating: /^([0-5])(\.[0-9]{2})?$/gm,
   };
   let _messageError = {
     _name: "Must be at least 4 characters example: mario",

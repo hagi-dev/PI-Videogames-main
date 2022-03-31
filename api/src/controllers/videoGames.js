@@ -68,11 +68,14 @@ exports.getAll = async (req, res) => {
           resData: [...result],
         });
       }
+      
+      let message = dataCompletedApiBd.length === 0 ? "No data" : null;
       res.status(200).json({
         apiCount: apiData1.length,
         dbCount: filterDataBd.length,
         count: apiData1.length + filterDataBd.length,
         resData: [...dataCompletedApiBd],
+        message:message,
       });
     }
   } catch (err) {
