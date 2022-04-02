@@ -10,6 +10,7 @@ export const RESET = "RESET";
 export const GET_HEADER_TEXT = "GET_HEADER_TEXT";
 export const GET_FILTER = "GET_FILTER";
 export const RESET_VIDEOGAME = "RESET_VIDEOGAME";
+export const GET_ERROR= "GET_ERROR";
 
 export const getAllVideoGames = () => {
   return dispatch => {
@@ -30,7 +31,11 @@ export const getAllVideoGames = () => {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.log("root error",err);
+        dispatch({
+          type: GET_ERROR,
+          payload: "Not connection internet",
+        })
       });
   };
 };

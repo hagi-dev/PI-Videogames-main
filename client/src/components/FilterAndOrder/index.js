@@ -38,7 +38,7 @@ const FilterAndOrder = props => {
         dbCount: videoGames.dbCount,
         genre: name === "genre" ? value : stateTextFilterAndOrder.genre,
         createdOrExisted:
-          name === "createdOrExisted" ? value : stateTextFilterAndOrder.createdOrExisted,
+        name === "createdOrExisted" ? value : stateTextFilterAndOrder.createdOrExisted,
       })
     );
   };

@@ -19,6 +19,7 @@ const VideogameList = () => {
   const currentPage = useSelector(state => state.pagination.current);
   const requireCountPage = 15;
   const countButton = partPaginationDate(filterData, requireCountPage);
+  const error = useSelector(state => state.rootReducer.error);
 
   const handleClickPagination = e => {
     let currentPage = parseInt(e.target.innerHTML);
@@ -35,11 +36,10 @@ const VideogameList = () => {
 
   return (
     <div className='videogameList'>
-      {paginationData2.length ===0 && !videoGames.message ? 
+      {paginationData2.length === 0 && !videoGames.message && !error.message &&
         numCardLoader.map((element, index) => {
           return <LoaderCard key={index} />;
-        }):
-        null}
+        })}
       {videoGames.message && (
         <p
           style={{
@@ -53,6 +53,9 @@ const VideogameList = () => {
           {videoGames.message}
         </p>
       )}
+      {
+        error.message && (<p>{error.message}</p>)
+      }
       {paginationData2 &&
         paginationData2.map((element, index) => {
           if (element.message) {

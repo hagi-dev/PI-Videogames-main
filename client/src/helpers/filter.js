@@ -1,5 +1,5 @@
 export const filterDate = (data,createdOrExisted,genre,dataLength) => {
-    if(dataLength===0 && createdOrExisted==='created'){ return [{message: 'No hay resultados'}]}
+    if(dataLength===0 && createdOrExisted==='created'){ return [{message: 'Not Found'}]}
     let dataSeparation = createdOrExisted === 'created' ? data.slice(0,dataLength) : createdOrExisted === 'existed' ? data.slice(dataLength) : data;
     if(genre==='all' || genre===''){return dataSeparation}
     if(genre !== "all"){
@@ -10,7 +10,7 @@ export const filterDate = (data,createdOrExisted,genre,dataLength) => {
             }
         }
         })
-        dataFilter = !dataFilter.length ? [{message: 'Not Fount'}] :  dataFilter;
+        dataFilter = !dataFilter.length ? [{message: 'Not Found'}] :  dataFilter;
         return dataFilter;
     }
 }

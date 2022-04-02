@@ -96,7 +96,7 @@ exports.create = async (req, res) => {
     }
   } catch (error) {
     // console.log(error);
-    res.status(500).send({ message: error.errors[0].message});
+    res.json({ message: error.errors[0].message});
   }
 };
 

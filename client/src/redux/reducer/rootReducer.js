@@ -8,6 +8,7 @@ import {
   GET_HEADER_TEXT,
   RESET,
   RESET_VIDEOGAME,
+  GET_ERROR
 } from "../action/actionRoot";
 
 const initialState = {
@@ -18,6 +19,9 @@ const initialState = {
     text: "",
     title: "Home",
   },
+  error:{
+    
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -60,6 +64,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videoGames: [],
       };
+    case GET_ERROR:
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          message: action.payload
+        }
+      }
     default:
       return state;
   }
