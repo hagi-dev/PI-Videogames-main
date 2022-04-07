@@ -18,6 +18,10 @@ export const getAllVideoGames = () => {
       .get("http://localhost:3001/videogames")
       .then(response => {
         dispatch({
+          type: GET_ERROR,
+          payload: "",
+        })
+        dispatch({
           type: INITIAL_PAGINATE_DATA,
           payload: response.data.resData,
         });
@@ -29,6 +33,7 @@ export const getAllVideoGames = () => {
           type: GET_ALL_VIDEOGAMERS,
           payload: response.data,
         });
+
       })
       .catch(err => {
         console.log("root error",err);
@@ -45,6 +50,11 @@ export const getVideogameById = id => {
     axios
       .get(`http://localhost:3001/videogame/${id}`)
       .then(response => {
+
+        dispatch({
+          type: GET_ERROR,
+          payload: "",
+        })
         dispatch({
           type: GET_VIDEOGAMER,
           payload: response.data,
@@ -52,6 +62,10 @@ export const getVideogameById = id => {
       })
       .catch(err => {
         console.log(err);
+        dispatch({
+          type: GET_ERROR,
+          payload: "Not connection internet",
+        })
       });
   };
 };
@@ -61,6 +75,10 @@ export const getVideogameByName = name => {
     axios
       .get(`http://localhost:3001/videogames?name=${name}`)
       .then(response => {
+        dispatch({
+          type: GET_ERROR,
+          payload: "",
+        })
         dispatch({
           type: GET_VIDEOGAMER_BY_NAME,
           payload: response.data,
@@ -72,9 +90,22 @@ export const getVideogameByName = name => {
       })
       .catch(err => {
         console.log(err);
+        dispatch({
+          type: GET_ERROR,
+          payload: "Not connection internet",
+        })
       });
   };
 };
+
+export const getError =(data)=>{
+  return dispatch => {
+    dispatch({
+      type: GET_ERROR,
+      payload: data,
+    })
+  }
+}
 
 export const getAllGenres = () => {
   return dispatch => {

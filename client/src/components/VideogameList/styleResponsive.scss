@@ -8,7 +8,7 @@
   border-radius: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 20px;
   padding-top: 10px;
   position: relative;
@@ -53,3 +53,17 @@
     }
   }
 }
+
+@media (max-width: 920px){
+  .videogameList {
+    height: 110%;
+  }
+}
+
+@media (max-width: 737px){
+  .videogameList {
+    overflow-y: auto;
+    grid-area: main2;
+  }
+}
+

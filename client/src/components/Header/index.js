@@ -5,19 +5,20 @@ import {
   getVideogameByName,
   getTextHeader,
   reset,
+  getError
 } from "../../redux/action/actionRoot";
 import { resetFilter } from "../../redux/action/actionFilterAndOrder";
 import { resetPagination } from "../../redux/action/actionPagination";
+import { getPageCurrent } from "../../redux/action/actionPagination";
 import videogame from "../../assets/img/videogame.png";
 import {formatUpperCase} from '../../helpers/format/formatUpperCase';
-import "./style.scss";
+import "./styleResponsive.scss";
 
 const Header = () => {
   const header = useSelector(state => state.rootReducer.header);
   const dispatch = useDispatch();
   const [active, setActive] = useState(!header.text.length ? false : true);
   const handleClickInput = (e) => {
-     console.log('este es el evento click input  ', e); 
     e.isTrusted && setActive(true);
   };
 
@@ -27,12 +28,14 @@ const Header = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    if(header.text !== ''){
+    if(header.text !== ''){ 
+    dispatch(getError(''));  
     dispatch(getVideogameByName(formatUpperCase(header.text)));
     dispatch(getTextHeader({value:'Search', name: 'title'}));
     dispatch(reset());
     dispatch(resetFilter());
     dispatch(resetPagination());
+    dispatch(getPageCurrent(1)); 
     }
   };
 
@@ -59,6 +62,7 @@ const Header = () => {
             onChange={handleChange}
             onClick={handleClickInput}
             type="text"
+            placeholder="Search for name...."
           />
           <button type="submit"> Search</button>
           {header.title=== 'Search' && <a href="/home"><span>←</span><p>Go Home</p></a>}

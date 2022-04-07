@@ -8,7 +8,7 @@ import VideogameList from '../../components/VideogameList/index';
 import FilterAndOrder from '../../components/FilterAndOrder/index';
 import { resetVideogame } from '../../redux/action/actionRoot';
 import { getStateSelection } from '../../redux/action/actionFilterAndOrder';
-import './style.scss';
+import './styleResponsive.scss';
 
 const Videogames = () => {
     const paginateInitial = useSelector(state => state.pagination.paginationData);

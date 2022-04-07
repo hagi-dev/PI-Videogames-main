@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './style.scss';
+import './prueba.scss';
 
 const VideoGameCard = props => {
     let imgDefaul = 'https://holatelcel.com/wp-content/uploads/2020/08/mario-bross-google-game--1280x720.png';

@@ -8,10 +8,11 @@ import { getPaginationCurrent, getPageCurrent } from "../../redux/action/actionP
 import { partPaginationDate, paginationData } from "../../helpers/pagination";
 import LoaderCard from "../LoaderCard/index";
 import notFound from '../../assets/img/notFound.png';
-import "./style.scss";
+// import './style.scss';
+import "./styleResponsive.scss";
 
 const VideogameList = () => {
-  const numCardLoader = new Array(14).fill(0);
+  const numCardLoader = new Array(14).fill(null);
   const filterData = useSelector(state => state.filterAndOrder.filterData);
   const videoGames = useSelector(state => state.rootReducer.videoGames);
   const paginationData2 = useSelector(state => state.pagination.paginationData);
@@ -30,7 +31,6 @@ const VideogameList = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect list");
     dispatch(getPaginationCurrent(paginationData(filterData, 15, currentPage)));
   }, [filterData]);
 

@@ -41,3 +41,24 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 1135px){
+  html{
+    font-size: 14px;  
+  }
+}
+@media (max-width: 920px){
+  html{
+    font-size: 13px;  
+  }
+  .App{
+    overflow-y: scroll;
+  }
+}
+@media (max-width: 400px){
+  html{
+    font-size: 12px;  
+  }
+}
+
+

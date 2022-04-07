@@ -19,7 +19,7 @@ const Pagination = props => {
               state={stateButton[element]}
               key={index}
               handleClickPagination={handleClickPagination}
-              text={element}
+              text={index+1}
               functionChange={setStateButton}
             />
           );

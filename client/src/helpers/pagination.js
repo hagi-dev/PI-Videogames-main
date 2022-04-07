@@ -3,6 +3,7 @@ export function paginationData (data,subPart,page) {
     if( !data || data.length===0){
         return [];
     }
+    paginationData = [];
     if(data.length<=subPart){
         return data;
     }
@@ -31,5 +32,6 @@ export function partPaginationDate (data,subPart) {
     for (let i = 1; i <= countChange;i++){
         pagination.push(i);
     }
+    console.log("fn pagination ",pagination);
     return pagination;
 }

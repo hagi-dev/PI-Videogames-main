@@ -9,9 +9,9 @@ const Button = props => {
     <div className={`Button ${state ? 'current' : ''}`} onClick={
       (e) => {
         handleClickPagination(e);
-        functionChange((item)=>{
+        functionChange(()=>{
           return {
-            [text]: true
+            [text]: true,
           };
         });
       }

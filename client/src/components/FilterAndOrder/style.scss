@@ -1,17 +1,45 @@
+@mixin labelH4-style() {
+  width: 150px;
+  position: relative;
+  margin: 0 10px;
+
+  .h4 {
+    font-family: "mulish", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    position: absolute;
+    color: #ffffff;
+    left: 0;
+    right: 0;
+    top: 6px;
+    transition: all 0.2s ease-in-out;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  .h4.activate {
+    transform: translate(0px, -20px);
+    font-size: 12px;
+    color: rgb(160, 160, 165);
+  } 
+}
+
 .filterAndOrder {
+  
   width: 98%;
-  height: 100px !important;
   padding-bottom: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: flex-start;
+  position: relative;
   z-index: 100;
+  overflow: hidden;
 
   .filterAndOrder__containerFilter {
     width: 400px;
     display: flex;
     justify-content: center;
-    margin-right: 20px;
     margin-top: 10px;
 
     h5 {
@@ -21,63 +49,18 @@
     }
 
     .filterAndOrder__filterGenre {
-      width: 150px;
-      position: relative;
-      margin: 0 10px;
-
-      .h4 {
-        font-family: "mulish", sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        position: absolute;
-        color: #ffffff;
-        left: 0;
-        right: 0;
-        top: 7px;
-        transition: all 0.2s ease-in-out;
-        z-index: 100;
-        cursor: pointer;
-      }
-
-      .h4.activate {
-        transform: translate(0px, -20px);
-        font-size: 12px;
-        color: rgb(160, 160, 165);
-      }
+      @include labelH4-style();
     }
 
     .filterAndOrder__filterCreatedOrExisted {
-      width: 150px;
-      position: relative;
-      margin: 0 10px;
-
-      .h4 {
-        font-family: "mulish", sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        position: absolute;
-        color: #ffffff;
-        left: 0;
-        right: 0;
-        top: 6px;
-        transition: all 0.2s ease-in-out;
-        z-index: 100;
-        cursor: pointer;
-      }
-
-      .h4.activate {
-        transform: translate(0px, -20px);
-        font-size: 12px;
-        color: rgb(160, 160, 165);
-      }
+      @include labelH4-style();
     }
   }
 
   .filterAndOrder__containerOrder {
-    width: 350px;
+    width: 400px;
     display: flex;
     justify-content: center;
-    margin-left: 20px;
     margin-top: 10px;
 
     h5 {
@@ -87,56 +70,102 @@
     }
 
     .filterAndOrder__OrderAlphabetOrRating {
-      width: 150px;
-      position: relative;
-      margin: 0 10px;
-
-      .h4 {
-        font-family: "mulish", sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        position: absolute;
-        color: #ffffff;
-        left: 0;
-        right: 0;
-        top: 6px;
-        transition: all 0.2s ease-in-out;
-        z-index: 100;
-        cursor: pointer;
-      }
-
-      .h4.activate {
-        transform: translate(0px, -20px);
-        font-size: 12px;
-        color: rgb(160, 160, 165);
-      }
+      @include labelH4-style();
     }
 
     .filterAndOrder__OrderAscOrDesc {
-      width: 150px;
-      position: relative;
-      margin: 0 10px;
-      z-index: 10;
-
-      .h4 {
-        font-family: "mulish", sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        position: absolute;
-        color: #ffffff;
-        left: 0;
-        right: 0;
-        top: 6px;
-        transition: all 0.2s ease-in-out;
-        z-index: 100;
-        cursor: pointer;
-      }
-
-      .h4.activate {
-        transform: translate(0px, -20px);
-        font-size: 12px;
-        color: rgb(160, 160, 165);
-      }
+      @include labelH4-style();
     }
+  }
+}
+.Button__menuFilter{
+  display: none;
+}
+
+@media (max-width: 1157px){
+  .Button__menuFilter{
+    display: block;
+  }
+  .Button__menuFilter.active{
+    height: 50px;
+  }
+  .Button__menuFilter{
+    box-sizing: border-box;
+    width: 98%;
+    height: 100px ;
+    display: flex;
+    padding-top: 3%;
+    button{
+      width: 150px;
+      border-radius: 10px;
+      height: 45px;
+      font-family: "mulish", sans-serif;
+      z-index: 99999;
+      border: none;
+      color: #ffffff;
+      background: rgb(49, 106, 254);
+          background: linear-gradient(
+            90deg,
+            rgba(49, 106, 254, 1) 0%,
+            rgba(14, 57, 167, 1) 58%
+          );
+    }
+
+  }
+
+  .filterAndOrder.active{
+    display: flex;
+    width: 98%;
+    position: absolute;
+    top: 50px;
+    height: 25vh ;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    border-radius: 10px;
+    transition: all .3s ;
+    .filterAndOrder__containerFilter{
+      position: absolute;
+      top: 10px;
+    }
+    .filterAndOrder__containerOrder{
+      position: absolute;
+      top: 80px;
+    }
+  }
+  .filterAndOrder{
+    height: 0;
+    position: absolute;
+    .filterAndOrder__containerFilter{
+      position: absolute;
+      top: 10px;
+    }
+    .filterAndOrder__containerOrder{
+      position: absolute;
+      top: 80px;
+    }
+  }
+
+}
+
+@media (max-width: 920px){
+  .Button__menuFilter{
+    margin-bottom: 80px;
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 400px){
+  .Button__menuFilter{
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 737px){
+  .Button__menuFilter{
+    grid-area: buttonFilter;
+  }
+  .Button__menuFilter{
+    margin-bottom: 135px;
+    margin-left: 20px;
   }
 }

@@ -1,0 +1,78 @@
+.videogames{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto auto;
+    position: relative;
+    max-width: 1550px;
+    margin: 0 auto;
+    grid-template-areas:
+            "header main"
+            "header main" ;
+
+    .videogames__header{
+        grid-area: header;
+        height: 100vh;
+        min-height: 600px;
+        max-height: 720px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .videogames__body{
+        height: 95%;
+        width: 100%;
+        z-index: 9;
+        display: grid;
+        position: relative;
+        grid-template-columns: 100%;
+        grid-template-rows: 10% 1fr;
+        grid-area: main;
+    }
+    .videogames__buttonCreate{
+        position: fixed;
+        width:70px;
+        height:70px;
+        z-index: 99;
+        bottom: 4%;
+        right: 3%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+} 
+
+@media (max-width: 920px){
+    .videogames{
+        overflow-y: scroll;
+        grid-template-areas:
+            "header header"
+            "main main" ;
+        .videogames__header {
+            height: 100px;
+            min-height: 100px;
+            max-height: 100px;
+            
+        }   
+        .videogames__body{
+            height:auto;
+            justify-items: center;
+        align-items: center;
+        }    
+    }
+    .videogames__buttonCreate{
+        margin-bottom: 10%;
+    }
+  }
+
+  @media (max-width: 737px){
+    .videogames__body{
+        grid-template-columns: 1fr;
+        grid-template-rows: 220px auto !important;
+        grid-template-areas:
+            "buttonFilter"
+            "main2"  !important;
+    }
+  }

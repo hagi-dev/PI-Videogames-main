@@ -23,10 +23,11 @@ const FilterAndOrder = props => {
   const { videoGames } = props;
   const genresData = useSelector(state => state.rootReducer.genres);
   const filterData = useSelector(state => state.filterAndOrder.filterData);
+  const [fiterResponsive, setFilterResponsive] = useState(false);
   const abstractDataGenre = genresData.map(genre => genre.name);
   const genres = ["all", ...abstractDataGenre];
   const createdOrExisted = ["all", "existed", "created"];
-  const alphabetOrRating = ["alphabet", "rating","rating count"];
+  const alphabetOrRating = ["alphabet", "rating", "rating count"];
   const ascOrDesc = ["asc", "desc"];
   // const platform = platformAndGenres;
 
@@ -38,7 +39,7 @@ const FilterAndOrder = props => {
         dbCount: videoGames.dbCount,
         genre: name === "genre" ? value : stateTextFilterAndOrder.genre,
         createdOrExisted:
-        name === "createdOrExisted" ? value : stateTextFilterAndOrder.createdOrExisted,
+          name === "createdOrExisted" ? value : stateTextFilterAndOrder.createdOrExisted,
       })
     );
   };
@@ -74,66 +75,100 @@ const FilterAndOrder = props => {
     );
   }, [stateSelection.state]);
 
+  React.useEffect(() => {
+    console.log("useEffect", window.innerWidth);
+    window.addEventListener('resize', changeFilterResponsive);
+    return () => {
+      window.removeEventListener('resize',  changeFilterResponsive);
+    }
+  });
+  const changeFilterResponsive = () => {
+    if(window.innerWidth >= 1157){
+      console.log('window.innerWidth >= 1157 validacion', window.innerWidth)
+      setFilterResponsive(false);
+    }
+  }
+
   return (
-    <div className="filterAndOrder">
-      <div className="filterAndOrder__containerFilter">
-        <h5>Filter:</h5>
-        <div className="filterAndOrder__filterGenre">
-          <h4 className={`h4 ${stateTextFilterAndOrder["genre"].length ? "activate" : "deactivate"} `}>
-            Genre
-          </h4>
-          {console.log("RESET_FILTER stateTextFilterAndOrder render", stateTextFilterAndOrder)}
-          <Selection
-            onchange={onChangeFilter}
-            options={genres}
-            version={"v1"}
-            name={"genre"}
-            value={stateTextFilterAndOrder.genre}
-          />
+    <>
+      <div className={`Button__menuFilter ${fiterResponsive ? 'active': ''}`}>
+        <button type="button" onClick={(e)=>{ setFilterResponsive(!fiterResponsive)}}>
+          Filter And Order 
+        </button>
+      </div>
+      <div className={`filterAndOrder ${fiterResponsive ? 'active': ''}`}>
+        <div className='filterAndOrder__containerFilter'>
+          <h5>Filter:</h5>
+          <div className='filterAndOrder__filterGenre'>
+            <h4
+              className={`h4 ${
+                stateTextFilterAndOrder["genre"].length ? "activate" : "deactivate"
+              } `}
+            >
+              Genre
+            </h4>
+            <Selection
+              onchange={onChangeFilter}
+              options={genres}
+              version={"v1"}
+              name={"genre"}
+              value={stateTextFilterAndOrder.genre}
+            />
+          </div>
+          <div className='filterAndOrder__filterCreatedOrExisted'>
+            <h4
+              className={`h4 ${
+                stateTextFilterAndOrder.createdOrExisted.length ? "activate" : "deactivate"
+              } `}
+            >
+              Created Or Existed
+            </h4>
+            <Selection
+              onchange={onChangeFilter}
+              options={createdOrExisted}
+              version={"v2"}
+              name={"createdOrExisted"}
+              value={stateTextFilterAndOrder.createdOrExisted}
+            />
+          </div>
         </div>
-        <div className="filterAndOrder__filterCreatedOrExisted">
-          <h4 className={`h4 ${stateTextFilterAndOrder.createdOrExisted.length ? "activate" : "deactivate"} `}>
-            Created Or Existed
-          </h4>
-          <Selection
-            onchange={onChangeFilter}
-            options={createdOrExisted}
-            version={"v2"}
-            name={"createdOrExisted"}
-            value={stateTextFilterAndOrder.createdOrExisted}
-          />
+        <div className='filterAndOrder__containerOrder'>
+          <h5>Order:</h5>
+          <div className='filterAndOrder__OrderAlphabetOrRating'>
+            <h4
+              className={`h4 ${
+                stateTextFilterAndOrder["alphabetOrRating"].length ? "activate" : "deactivate"
+              } `}
+            >
+              Alphabet or Rating
+            </h4>
+            <Selection
+              onchange={onChangeOrder}
+              options={alphabetOrRating}
+              version={"v1"}
+              name={"alphabetOrRating"}
+              value={stateTextFilterAndOrder.alphabetOrRating}
+            />
+          </div>
+          <div className='filterAndOrder__OrderAscOrDesc'>
+            <h4
+              className={`h4 ${
+                stateTextFilterAndOrder["order"].length ? "activate" : "deactivate"
+              } `}
+            >
+              Asc or Desc
+            </h4>
+            <Selection
+              onchange={onChangeOrder}
+              options={ascOrDesc}
+              version={"v2"}
+              name={"order"}
+              value={stateTextFilterAndOrder.order}
+            />
+          </div>
         </div>
       </div>
-      <div className="filterAndOrder__containerOrder">
-        <h5>Order:</h5>
-        <div className="filterAndOrder__OrderAlphabetOrRating">
-          <h4
-            className={`h4 ${stateTextFilterAndOrder["alphabetOrRating"].length ? "activate" : "deactivate"} `}
-          >
-            Alphabet or Rating
-          </h4>
-          <Selection
-            onchange={onChangeOrder}
-            options={alphabetOrRating}
-            version={"v1"}
-            name={"alphabetOrRating"}
-            value={stateTextFilterAndOrder.alphabetOrRating}
-          />
-        </div>
-        <div className="filterAndOrder__OrderAscOrDesc">
-          <h4 className={`h4 ${stateTextFilterAndOrder["order"].length ? "activate" : "deactivate"} `}>
-            Asc or Desc
-          </h4>
-          <Selection
-            onchange={onChangeOrder}
-            options={ascOrDesc}
-            version={"v2"}
-            name={"order"}
-            value={stateTextFilterAndOrder.order}
-          />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

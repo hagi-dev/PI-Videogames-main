@@ -13,6 +13,7 @@ const Videogame = () => {
     "https://holatelcel.com/wp-content/uploads/2020/08/mario-bross-google-game--1280x720.png";
   const dispatch = useDispatch();
   const { id } = useParams();
+  const error = useSelector(state => state.rootReducer.error);
   const videoGame = useSelector(state => state.rootReducer.videoGame);
   let released = new Date(videoGame.releaseDate).toDateString();
   const [seeDescription, setSeeDescription] = useState({
@@ -95,11 +96,11 @@ const Videogame = () => {
         </div>
       </div>
     </div>
-  ) : (
+  ) : !error.message ? (
     <div className='loader'>
       <Loader />
     </div>
-  );
+  ): <p>{error.message}</p>;
 };
 
 export default Videogame;
