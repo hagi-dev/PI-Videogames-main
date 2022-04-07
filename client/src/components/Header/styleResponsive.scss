@@ -181,7 +181,6 @@
           text-decoration: none;
           display: flex;
           align-items: center;
-          z-index: 999999;
   
           span{
             font-size: 1.5rem;
@@ -252,6 +251,9 @@
           button{
             width: 18vw ;
             height: 35px ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-left: 8px;
           }
           label{

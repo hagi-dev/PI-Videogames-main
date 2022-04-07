@@ -118,7 +118,7 @@
     width: 98%;
     position: absolute;
     top: 50px;
-    height: 25vh ;
+    height: 45vh ;
     background-color: rgba(0, 0, 0, 0.9);
     justify-content: center;
     border-radius: 10px;
@@ -149,7 +149,7 @@
 
 @media (max-width: 920px){
   .Button__menuFilter{
-   height: 120px;
+   height: 200px;
   }
 }
 
@@ -159,12 +159,8 @@
 //   }
 // }
 
-// @media (max-width: 737px){
-//   .Button__menuFilter{
-//     grid-area: buttonFilter;
-//   }
-//   .Button__menuFilter{
-//     margin-bottom: 135px;
-//     margin-left: 20px;
-//   }
-// }
+@media (max-width: 737px){
+  .Button__menuFilter{
+    grid-area: buttonFilter;
+  }
+}

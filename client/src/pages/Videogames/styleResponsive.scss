@@ -54,7 +54,7 @@
             height: 100px;
             min-height: 100px;
             max-height: 100px;
-            
+            z-index: 999999999;
         }   
         .videogames__body{
             height:auto;
@@ -66,12 +66,19 @@
     }
   }
 
-//   @media (max-width: 737px){
-//     .videogames__body{
-//         grid-template-columns: 1fr;
-//         grid-template-rows: 220px auto !important;
-//         grid-template-areas:
-//             "buttonFilter"
-//             "main2"  !important;
-//     }
-//   }
+  @media (max-width: 920px){
+    .videogames__body{
+        font-size: 1rem;
+        margin-top: 1.5em;
+        grid-template-columns: 1fr;
+        grid-template-rows: 6em auto !important;
+        grid-template-areas:
+            "buttonFilter"
+            "main2"  !important;
+    }
+  }
+  @media (max-width: 735px){
+    .videogames__body{
+        grid-template-rows: 5em auto !important;
+    }
+  }
