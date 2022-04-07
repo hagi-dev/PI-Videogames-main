@@ -59,7 +59,6 @@
         .videogames__body{
             height:auto;
             justify-items: center;
-        align-items: center;
         }    
     }
     .videogames__buttonCreate{
@@ -67,12 +66,12 @@
     }
   }
 
-  @media (max-width: 737px){
-    .videogames__body{
-        grid-template-columns: 1fr;
-        grid-template-rows: 220px auto !important;
-        grid-template-areas:
-            "buttonFilter"
-            "main2"  !important;
-    }
-  }
+//   @media (max-width: 737px){
+//     .videogames__body{
+//         grid-template-columns: 1fr;
+//         grid-template-rows: 220px auto !important;
+//         grid-template-areas:
+//             "buttonFilter"
+//             "main2"  !important;
+//     }
+//   }
