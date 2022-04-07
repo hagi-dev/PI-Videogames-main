@@ -16,13 +16,16 @@ const TextField = props => {
     textArea,
     require,
     children,
+    data,
   } = props;
   return (
     <div className="container_textField">
       <label className={`label ${active && "active"}`}>{name}{require && '(*)'}</label>
       {!textArea ? (
         <>
-          <input
+         {
+           type !== "select"? (
+            <input
             list="data"
             className="textField input"
             style={{ width: width }}
@@ -33,6 +36,25 @@ const TextField = props => {
             onClick={clickFunction}
             type={type}
           />
+          ) : (
+            <select
+            list="data"
+            className="textField input"
+            style={{ width: width }}
+            name={name}
+            value={value}
+            onBlur={blurFunction}
+            onChange={stateFunction}
+            onClick={clickFunction}
+          >
+            {
+              data && data.map((item,index) => {
+                return <option key={index} value={item}>{item}</option>
+              })
+            }
+          </select>
+          )
+         }
           {children}
         </>
       ) : (
@@ -71,7 +93,7 @@ TextField.propTypes = {
 
 TextField.defaultProps = {
   name: "I don't have a name",
-  width: "300px",
+  width: "250px",
   textArea: false,
 };
 

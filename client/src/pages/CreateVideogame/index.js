@@ -21,11 +21,17 @@ const CreateVideogame = () => {
   const dispatch = useDispatch();
   const genres = useSelector(state => state.rootReducer.genres);
   const options = genres.map(genre => genre.name);
+  const data = ["", ...options];
+  const [valueSelection, setValueSelection] = React.useState({
+    genres: "",
+    platform: "",
+  });
   const [stateButton, setStateButton] = React.useState("disabled");
   const [stateTextSelection, setStateTextSelection] = React.useState({
     genres: "",
     platform: "",
   });
+  const dataPlataform = ["",...platformsSelect]
   const dataSelections = {
     platform: platforms,
     genres: genres,
@@ -81,11 +87,20 @@ const CreateVideogame = () => {
     });
   };
 
-  const handleChangeSelect = (name, value) => {
-    setActiveLabel(prevState => ({
-      ...prevState,
-      [name]: true,
-    }));
+  const handleChangeSelect = e => {
+    let { name, value } = e.target;
+    setValueSelection(() => {
+      return {
+        ...valueSelection,
+        [name]: value,
+      };
+    });
+    setActiveLabel(() => {
+      return {
+        ...activeLabel,
+        [name]: true,
+      };
+    });
     let dataSelection = dataSelections[name].find(element => element.name === value);
     let exited = getData[name].find(element => element.id === dataSelection.id);
     setStateTextSelection(prevState => {
@@ -96,13 +111,16 @@ const CreateVideogame = () => {
     });
     !exited &&
       setGetData(item => {
+        console.log("este es el valor cambiante getData", getData);
         return {
           ...item,
           [name]: [...item[name], { ...dataSelection }],
         };
       });
+    console.log("este es el valor cambiante getData despues", getData);
   };
   const handleClick = e => {
+    console.log("handlerClick", e.target.name);
     setActiveLabel(() => {
       return {
         ...activeLabel,
@@ -174,7 +192,7 @@ const CreateVideogame = () => {
                 clickFunction={handleClick}
                 type={"text"}
               >
-                <p className={`messageInput ${error.name.state ? "error" : ""}`}>
+                <p className={`messageInput ${error.name.state ? 'error' : ""}`}>
                   {error.name.state ? error.name.message : messageGuide.name}
                 </p>
               </TextField>
@@ -211,41 +229,38 @@ const CreateVideogame = () => {
                   {error.description.state ? error.description.message : messageGuide.description}
                 </p>
               </TextField>
-              <div className='container_selection 1 '>
-                <h4
-                  name={"genres"}
-                  className={`h4 ${activeLabel.genres ? "activate" : "deactivate"} `}
+              <div className="conatiner-selectionGenres">
+              <TextField
+                active={activeLabel.genres}
+                name={"genres"}
+                textArea={false}
+                value={valueSelection.genres}
+                blurFunction={handleBlur}
+                stateFunction={handleChangeSelect}
+                clickFunction={handleClick}
+                type={"select"}
+                data={data}
+                width={'275px'}
+              >
+                <p className={`messageInput ${error.genres.state ? "error" : ""}`}>
+                  {error.genres.state ? error.genres.message : messageGuide.genre}
+                </p>
+              </TextField>
+              <div
+                  className='container_select-selection'
+                  style={{}}
                 >
-                  Genres {messageGuide.genre}
-                </h4>
-                <Selection2
-                  width={"100%"}
-                  name={"genres"}
-                  version={"v1"}
-                  value={stateTextSelection.genres}
-                  blurFunction={handleBlur}
-                  onchange={handleChangeSelect}
-                  options={options}
-                >
-                  <div
-                    className='container_select-selection'
-                    style={{ display: "flex", flexWrap: "wrap" }}
-                  >
-                    {getData.genres.map(genre => {
-                      return (
-                        <div key={genre.id} style={{ margin: "2px 3px" }}>
-                          <p>
-                            {genre.name}
-                            <button onClick={() => removeSelections(genre.id, "genres")}>X</button>
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <p className={`messageSelect ${error.genres.state ? "error" : ""}`}>
-                    {error.genres.state ? error.genres.message : messageGuide.genres}
-                  </p>
-                </Selection2>
+                  {getData.genres.map(genre => {
+                    return (
+                      <div key={genre.id} style={{ margin: "2px 3px" }}>
+                        <p>
+                          {genre.name}
+                          <button onClick={() => removeSelections(genre.id, "genres")}>X</button>
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             <div className='createVideogame__form__row 3'>
@@ -261,35 +276,38 @@ const CreateVideogame = () => {
                   {error.rating.state ? error.rating.message : messageGuide.rating}
                 </p>
               </TextField>
-              <div className='container_selection 2'>
-                <h4
-                  name={"genres"}
-                  className={`h4 ${activeLabel.platform ? "activate" : "deactivate"} `}
+              <div className='conatiner-selectionGenres'>
+              <TextField
+                active={activeLabel.platform}
+                name={"platform"}
+                textArea={false}
+                value={valueSelection.platform}
+                blurFunction={handleBlur}
+                stateFunction={handleChangeSelect}
+                clickFunction={handleClick}
+                type={"select"}
+                data={dataPlataform}
+                width={'275px'}
+              >
+                <p className={`messageInput ${error.platform.state ? "error" : ""}`}>
+                  {error.platform.state ? error.platform.message : messageGuide.platform}
+                </p>
+              </TextField>
+              <div
+                  className='container_select-selection'
+                  style={{}}
                 >
-                  Platform(*) {messageGuide.platform}
-                </h4>
-                <Selection2
-                  width={"100%"}
-                  name={"platform"}
-                  version={"v1"}
-                  value={stateTextSelection.platform}
-                  blurFunction={handleBlur}
-                  onchange={handleChangeSelect}
-                  options={platformsSelect}
-                >
-                  <div className='container_select-selection'>
-                    {getData.platform.map(e => {
-                      return (
-                        <div key={e.id} style={{ margin: "2px 3px" }}>
-                          <p>
-                            {e.name}
-                            <button onClick={() => removeSelections(e.id, "platform")}>X</button>
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Selection2>
+                  {getData.platform.map(item => {
+                    return (
+                      <div key={item.id} style={{ margin: "2px 3px" }}>
+                        <p>
+                          {item.name}
+                          <button onClick={() => removeSelections(item.id, "platform")}>X</button>
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

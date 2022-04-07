@@ -38,6 +38,25 @@
   .input {
     height: 45px;
   }
+  select{
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:vertical {
+      width: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(14, 57, 167, 0.75);
+      border-radius: 20px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    option{
+      color: darkblue;
+    }
+  }
 
   .textArea {
     padding: 5px 15px;

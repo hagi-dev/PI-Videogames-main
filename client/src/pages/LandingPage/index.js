@@ -15,10 +15,10 @@ const LandingPage2 = props => {
     <div className='landingPage'>
       <div className='landingPage__img'>
         <img src={Landing} />
-        <div className='landingPage__img-title'>
+      </div>
+      <div className='landingPage__img-title'>
           <h1>VIDEOGAMES</h1>
         </div>
-      </div>
       <div className='landingPage__buttonHome' onClick={handlerClick}>
         <a>Go Home  <span>{'  >>'}</span></a>
       </div>
