@@ -3,5 +3,5 @@ const router = express.Router();
 const genres = require('../controllers/genres');
 //const auth = require('../middleware/auth');
 
-router.get('/genres', genres.getAll);
+router.get('/api/genres', genres.getAll);
 module.exports = router;

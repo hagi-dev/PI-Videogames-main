@@ -172,9 +172,6 @@ const CreateVideogame = () => {
 
   return (
     <div className='createVideoGame' onClick={handleClickBase}>
-      <img className='createVideoGame__imageMario' src={mario} />
-
-      <img className='createVideoGame__imageLuigi' src={luigi} />
       <div className='createVideoGame__container'>
         <div className='createVideogame__title'>
           <h1>Create Videogame</h1>

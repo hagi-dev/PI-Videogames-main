@@ -5,22 +5,20 @@
 
 .createVideoGame {
   width: 100vw;
-  height: 100vh;
-  min-height: 875px;
   font-family: "mulish", sans-serif;
-  overflow-y:auto;
+  overflow-y:hidden;
   display: flex;
-  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 5vh;
   justify-content: center;
   position: relative;
-  max-width: 955px;
   margin: 0 auto;
   z-index: -1;
 
   .createVideoGame__imageMario {
     position: absolute;
-    bottom: 0%;
-    right: 8%;
+    top:450px;
+    right: -2%;
     z-index: 9;
     width: 17%;
     height: auto;
@@ -29,8 +27,8 @@
 
   .createVideoGame__imageLuigi {
     position: absolute;
-    bottom: 2%;
-    left: 9%;
+    top:450px;
+    left: 2%;
     z-index: 9;
     width: 15%;
     height: auto;
@@ -43,14 +41,11 @@
 
   .createVideoGame__container {
     width: 80%;
-    height: 95%;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(5px);
-    overflow-y: auto;
-    max-height: 850px;
-    overflow: auto;
     display: grid;
+    max-width: 750px;
     z-index: -1;
     grid-template-rows: 0.2fr 1.3fr;
 
@@ -206,8 +201,8 @@
         align-items: flex-end;
         justify-content: center;
         z-index: 0;
-        margin-bottom: 30px;
         margin-top: 40px;
+        margin-bottom: 20px;
         
         .button {
           margin-top: 15px;
@@ -281,13 +276,18 @@
   }
  }
 
+ @media (max-width:550px) {
+  .createVideoGame{
+    padding-top: 40px;
+  }
+ }
  @media (max-width:500px) {
   .conatiner-selectionGenres{
-    width: 100% !important;
+    width: 120% !important;
   }
  }
 
-@media (max-width: 860px){
+@media (max-width: 960px){
   .createVideoGame__imageLuigi{
     display: none;
   }

@@ -5,6 +5,7 @@
     grid-template-rows: auto auto;
     position: relative;
     max-width: 1550px;
+    max-height: 100vh;
     margin: 0 auto;
     grid-template-areas:
             "header main"
@@ -24,6 +25,7 @@
     .videogames__body{
         height: 95%;
         width: 100%;
+        min-height: 650px;
         z-index: 9;
         display: grid;
         position: relative;
@@ -46,7 +48,7 @@
 
 @media (max-width: 920px){
     .videogames{
-        overflow-y: scroll;
+        max-height: auto;
         grid-template-areas:
             "header header"
             "main main" ;

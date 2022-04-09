@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { formatUpperCase } from "../helpers/format/formatUpperCase";
 
-const apiUrl = "http://localhost:3001/";
+const apiUrl = "http://localhost:3001/api/";
 const createVideogameUrl = `${apiUrl}videogame`;
 
 export const methodsPost = ({
