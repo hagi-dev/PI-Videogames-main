@@ -5,10 +5,10 @@ import './style.scss';
 
 const IconPlataform = props => {
     const { plataform } = props;
-    const image = require(`../../assets/img/iconPlataform/${plataform}.png`);
+    const urlIcon = `https://videogamesimg.s3.sa-east-1.amazonaws.com/iconPlataform/${plataform}.png`;
     return (
     <div className="conatinerIcon">
-        <img className="icon" src={image} alt= {`${plataform} icons`} /> 
+        <img className="icon" src={urlIcon} alt= {`${plataform} icons`} /> 
         <h3>{plataform}</h3> 
     </div>
     )
