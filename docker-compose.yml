@@ -1,17 +1,10 @@
-
+version: "3.9"
+   
 
 services:
-  appback:
-    image: back
-    environment:
-      DB_USER: postgres
-      DB_PASSWORD: Alianza0606
-      DB_HOST: db
-      APIKEY: ea28a2c3c4bd4fd2b27ef4c80798cc96
-    depends_on:
-      - db  
-    ports:
-      - "3001:3001" 
+  ##############################
+  # Backend Container
+  ##############################
 
   db:
     image: postgres
@@ -21,11 +14,57 @@ services:
       - POSTGRES_DB=videogames
     ports:
       - "5432:5432"
-      
-  appfront:
-    image: front
-    ports:
-      - "3000:3000"
-    command: ["npm", "start"]
 
-   
+  api:
+    restart: always
+    image: videogames:backapp  
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: Alianza0606
+      DB_HOST: db
+      APIKEY: ea28a2c3c4bd4fd2b27ef4c80798cc96
+      restart: always
+    depends_on:
+      - db 
+    ports:
+      - "3001:3001"
+
+  ##############################
+  # UI Container
+  ##############################
+  front:
+    build:
+      context: ./client
+      dockerfile: ./dockerfile
+    image: videogames:frontapp 
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./client/nginx/certbot/conf:/etc/letsencrypt
+      - ./client/nginx/certbot/www:/var/www/certbot
+    tty: true  
+
+  ##############################
+
+  # ##############################
+  # # Certbot Container
+  # ##############################
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./UI/nginx/certbot/conf:/etc/letsencrypt
+  #     - ./UI/nginx/certbot/www:/var/www/certbot
+
+##############################
+# Pgadmin Container
+##############################
+# pgadmin:
+#   container_name: pgadmin4_container
+#   image: dpage/pgadmin4
+#   restart: always
+#   environment:
+#     PGADMIN_DEFAULT_EMAIL: a@a.com
+#     PGADMIN_DEFAULT_PASSWORD: root
+#   ports:
+#     - "5050:80"
