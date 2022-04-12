@@ -15,7 +15,7 @@ export const GET_ERROR= "GET_ERROR";
 export const getAllVideoGames = () => {
   return dispatch => {
     axios
-      .get("http://localhost:3001/api/videogames")
+      .get("http://15.229.7.220:3001/api/videogames")
       .then(response => {
         dispatch({
           type: GET_ERROR,
@@ -48,7 +48,7 @@ export const getAllVideoGames = () => {
 export const getVideogameById = id => {
   return dispatch => {
     axios
-      .get(`http://localhost:3001/api/videogame/${id}`)
+      .get(`http://15.229.7.220:3001/api/videogame/${id}`)
       .then(response => {
 
         dispatch({
@@ -73,7 +73,7 @@ export const getVideogameById = id => {
 export const getVideogameByName = name => {
   return dispatch => {
     axios
-      .get(`http://localhost:3001/api/videogames?name=${name}`)
+      .get(`http://15.229.7.220:3001/api/videogames?name=${name}`)
       .then(response => {
         dispatch({
           type: GET_ERROR,
@@ -110,7 +110,7 @@ export const getError =(data)=>{
 export const getAllGenres = () => {
   return dispatch => {
     axios
-      .get("http://localhost:3001/api/genres")
+      .get("http://15.229.7.220:3001/api/genres")
       .then(response => {
         dispatch({
           type: GET_ALL_GENRES,
